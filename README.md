@@ -103,6 +103,8 @@ The code is still quite messy—it needs a braver person to fix it properly. Fee
 - [ ] Optimize performance and listener efficiency.
 - [ ] Fix the World Loading system properly.
 - [ ] Fix the Herobrine troll and make it clean.
+- [ ] Add blocklist to config.yml for safety
+- [ ] Fix update checker using https://www.spigotmc.org/resources/⭐-trollingfreedomreborn-⭐-1-free-troll-plugin-with-gui.131388/
 
 ---
 
