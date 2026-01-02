@@ -1,8 +1,8 @@
 name: $name
 version: $version
 description: $description
-author: iAngry
-main: me.iangry.trollingfreedom.main.Core
+author: iAngry, LeoMadrassi
+main: me.leodev.trollingfreedomreborn.main.Core
 softdepend: [Essentials, Citizens, ProtocolLib]
 api-version: $apiVersion
 commands:
@@ -11,11 +11,18 @@ commands:
     aliases: [ tf ]
   trollgui:
     descrption: Troll GUI open
-    aliases: [tgui, trollingfreedomgui, tfgui]
+    aliases: [ltroll,tgui, trollingfreedomgui, tfgui. tfl]
   untroll:
     description: Untroll player
-    aliases: [ stoptroll ]
-  trollp:
+    aliases: [ luntroll, stoptroll ]
+  trollf:
     description: Troll with CMD
+    aliases: [ trollcmd ]
+  unchesttroll:
+    description: Stops lock inventory for sender
+    aliases: [ unlockinv ]
+  panicstoptroll:
+    description: stops all troll by this plugin for every player
+    aliases: [trollpanic, trollps, pstoptroll, tfrstop, tfstop]
   control:
-  test:
+    description: Lets you control player

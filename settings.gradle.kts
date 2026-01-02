@@ -1,2 +1,2 @@
-rootProject.name = "TrollingFreedom"
+rootProject.name = "TrollingFreedomReborn"
 

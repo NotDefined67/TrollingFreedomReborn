@@ -1,12 +1,12 @@
 plugins {
     id("java")
     id("com.gradleup.shadow") version "9.0.0-beta11"
-    id("io.papermc.paperweight.userdev") version "2.0.0-beta.16"
+    id("io.papermc.paperweight.userdev") version "2.0.0-beta.19"
 }
 
-group = "me.iangry"
-version = "2.5.0"
-description = "A troll plugin with GUI"
+group = "me.leodev"
+version = "3.0.0"
+description = "A troll plugin with GUI - modified by leo"
 
 repositories {
     mavenCentral()
@@ -14,18 +14,20 @@ repositories {
     maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://repo.dmulloy2.net/repository/public/")
     maven("https://maven.citizensnpcs.co/repo")
-    maven("https://repo.essentialsx.net/releases/")
+    maven("https://repo.essentialsx.net/snapshots/")
 }
 
 dependencies {
-    paperweight.paperDevBundle("1.21.4-R0.1-SNAPSHOT")
-    compileOnly("com.comphenix.protocol:ProtocolLib:5.1.0") {
+    paperweight.paperDevBundle("1.21.11-R0.1-SNAPSHOT")
+    compileOnly("net.dmulloy2:ProtocolLib:5.4.0") {
         exclude("*", "*")
     }
-    compileOnly("net.citizensnpcs:citizens-main:2.0.35-SNAPSHOT") {
+    implementation("commons-lang:commons-lang:2.6")
+    implementation("com.github.cryptomorin:XSeries:13.6.0")
+    compileOnly("net.citizensnpcs:citizens-main:2.0.41-SNAPSHOT") {
         exclude("*", "*")
     }
-    compileOnly("net.essentialsx:EssentialsX:2.21.0") {
+    compileOnly("net.essentialsx:EssentialsX:2.22.0-SNAPSHOT") {
         exclude("*", "*")
     }
 }
@@ -39,8 +41,10 @@ tasks {
     assemble {
         dependsOn(shadowJar)
     }
+
     shadowJar {
-        archiveFileName.set("TrollingFreedom-${version}.jar")
+        archiveFileName.set("TrollingFreedomReborn-${version}.jar")
+        relocate("com.cryptomorin.xseries", "me.leodev.trollingfreedomreborn.other")
         minimize()
     }
     withType<JavaCompile> {
@@ -58,5 +62,14 @@ tasks {
         filesMatching("plugin.yml") {
             expand(props)
         }
+    }
+    val copyJar = register<Copy>("copyJar") {
+        from(shadowJar.get().archiveFile)
+        // Adjust this path if the drive letter or folder structure differs
+        into("C:/Projects/MineCraftTestServer/1.21.11/plugins")
+    }
+
+    build {
+        finalizedBy(copyJar)
     }
 }

@@ -1,0 +1,48 @@
+package me.leodev.trollingfreedomreborn.commands;
+
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.events.PacketContainer;
+import me.leodev.trollingfreedomreborn.main.Core;
+import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
+
+import java.lang.reflect.Field;
+
+public class Credits implements Listener {
+
+
+    static Field field_spectatorMode;
+
+    static {
+        field_spectatorMode = null;
+        try {
+            field_spectatorMode = PacketType.Play.Server.GAME_STATE_CHANGE.getPacketClass().getDeclaredField("e");
+        } catch (NoSuchFieldException e) {
+            Core.instance.getLogger().severe("Failed to initialise the troll. This server version is not compatible.");
+            e.printStackTrace();
+        }
+    }
+
+    public static boolean sendPacket(final Player player, final PacketContainer packet) {
+        ProtocolLibrary.getProtocolManager().sendServerPacket(player, packet);
+        return true;
+    }
+
+    public void Credits(Player player) {
+        if (field_spectatorMode == null) {
+            Core.instance.getLogger().severe("Failed to show credits screen to player. This server version is not compatible.");
+            return;
+        }
+        final PacketContainer packet = new PacketContainer(PacketType.Play.Server.GAME_STATE_CHANGE);
+        try {
+            final Object spectatorMode = field_spectatorMode.get(null);
+            packet.getGameStateIDs().write(0, 4);
+            packet.getFloat().write(0, 1.0F);
+            Credits.sendPacket(player, packet);
+        } catch (IllegalAccessException e) {
+            Core.instance.getLogger().severe("Failed to show credits screen to player:");
+            e.printStackTrace();
+        }
+    }
+}

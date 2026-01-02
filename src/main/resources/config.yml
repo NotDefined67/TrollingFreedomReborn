@@ -1,31 +1,32 @@
-prefix: '&b&lTF &8| &7'
+prefix: '&b&lTFR &8| &7'
 # For chat. + settings menu
-no-perms: '&b&lTF &8| &7You have no permission to run this command'
+no-perms: '&b&lTFR &8| &7You have no permission to run this command'
 # Chat massages
-cant-use-in-console: "&b&lTF &8| &bYou cannot use this command in console"
-not-online: "&b&lTF &8| &b%player% &3is not online"
-untrolled: "&b&lTF &8| &b%player% &3has been untrolled"
-cannot-troll-yourself: "&b&lTF &8| &7You cannot troll yourself with this specific troll"
-control-troll-grace-period: "&b&lTF &8| &7The troll has ended so you have &c&l30 seconds &7of spectator mode/invisibility to leave"
-control-troll-grace-period-ended: "&b&lTF &8| &7You are now visible"
-trollp-usage: "&b&lTF &8| &bCommand Usage: &3/trollp <PLAYER> <TROLL>"
-trollingfreedom-console-no-update: "&3[&9TrollingFreedom&3] &bThere is no new update available"
+cant-use-in-console: "&b&lTFR &8| &bYou cannot use this command in console"
+not-online: "&b&lTFR &8| &b%player% &3is not online"
+untrolled: "&b&lTFR &8| &b%player% &3has been untrolled"
+cannot-troll-yourself: "&b&lTFR &8| &7You cannot troll yourself with this specific troll"
+control-troll-grace-period: "&b&lTFR &8| &7The troll has ended so you have &c&l30 seconds &7of spectator mode/invisibility to leave"
+control-troll-grace-period-ended: "&b&lTFR &8| &7You are now visible"
+trollf-usage: "&b&lTFR &8| &bCommand Usage: &3/trollf <PLAYER> <TROLL>"
+trollingfreedom-console-no-update: "&3[&9TrollingFreedomReborn&3] &bThere is no new update available"
 #/TrollingFreedom
 trollingfreedom-help:
-  - "&3[&9TrollingFreedom&3]"
-  - "&bAuthor&7: &3iAngry - &bDiscord&7: &3&nhttps://discord.gg/DkWRaszkDy"
+  - "&3[&9TrollingFreedomReborn&3]"
+  - "&bAuthor&7: &3iAngry, modified by LeoMadrassi"
   - "&bVersion&7: &3%version%"
   - "&bCommands&7: "
   - "&bGUI&7: &3/Troll"
-  - "&bCMD Line&7: &3/Trollp"
+  - "&bCMD Line&7: &3/trollf"
   - "&bStop Trolls:&7: &3/UnTroll (Player)"
 values:
+  untroll-on-quit: false
   using-uuid: true
   dependency-downloader: true
 menu:
   select-player: '&7Select a player'
   settings: '&cSelect settings'
-  menu-title: '&8|&r &b&l&nTrolling&3&l&nFreedom&r &8|'
+  menu-title: '&8|&r &b&l&nT&3&l&nFR&r &8|'
   # for the troll menu (Not settings!)
   messages:
     no-item-in-hand: '&7Player &b&l%player% &7Doesn''t have an item in the hand!'
@@ -213,7 +214,7 @@ items:
   nuke-lore: '&7Your victim will be &4&lNUKED'
   #^ Nuke
   tntplace-name: '&cTNT Place'
-  tntplace-lore: '&7Replaces your victims blocked with primed tnt'
+  tntplace-lore: '&7Replaces your victims blocks with primed tnt'
   #^ TNT place
   void-name: '&eVoid TP'
   void-lore: '&7Teleports your victim to the void'
@@ -225,7 +226,7 @@ items:
   worldloading-lore: '&7Sends the world loading screen to your victim, they''re stuck now hehe'
   #^ World Loading Screen
   explodeonchat-name: '&4Explode On Chat'
-  explodeonchat-lore: '&7Explodes your victim when anyone sends a chat message'
+  explodeonchat-lore: '&7Explodes your victim when they send a chat message'
   #^ Explode On Chat
   invrave-name: '&dInventory Rave'
   invrave-lore: '&aC&bo&cl&do&eu&fr&6!'
