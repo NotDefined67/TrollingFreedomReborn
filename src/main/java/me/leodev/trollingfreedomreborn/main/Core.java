@@ -205,20 +205,28 @@ public class Core extends JavaPlugin implements Listener {
         usingUUID = getServer().getOnlineMode();
 
 
-        new UpdateChecker(this, 0).getVersion(version -> {
+        new UpdateChecker(this, 131388).getVersion(version -> {
             if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
                 String message1 = (String) Core.instance.getConfig().get("trollingfreedom-console-no-update");
                 String replaced1 = message1.replace("&", "§");
                 getServer().getConsoleSender().sendMessage(replaced1);
             } else {
                 getServer().getConsoleSender().sendMessage(ChatColor.RED + "=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                getServer().getConsoleSender().sendMessage(ChatColor.RED + "I am too lazy to make a update checker!");
-                getServer().getConsoleSender().sendMessage(ChatColor.RED + "Please check spigot page or github for updates for §bTrolling§3§lFreedomReborn");
-                getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "§nhttps://github.com/NotDefined67/TrollingFreedomReborn");
+                getServer().getConsoleSender().sendMessage(ChatColor.RED + "There is an update to Trolling Freedom Reborn!");
+                getServer().getConsoleSender().sendMessage(ChatColor.RED + "Please check spigot page, modrinth page or github for updates for §bTrolling§3§lFreedomReborn");
+                getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "Github: §nhttps://github.com/NotDefined67/TrollingFreedomReborn");
+                getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "Spigot: §nhttps://www.spigotmc.org/resources/.131388/");
+                getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "Modrinth: §nhttps://modrinth.com/plugin/trollingfreedomreborn");
                 getServer().getConsoleSender().sendMessage(ChatColor.RED + "=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                Bukkit.getOnlinePlayers().stream().filter(ServerOperator::isOp).forEach(operator -> operator.sendMessage("§b§lTF §8| §7There is no update checker for §bTrolling§3§lFreedomReborn"));
-                Bukkit.getOnlinePlayers().stream().filter(ServerOperator::isOp).forEach(operator -> operator.sendMessage("§7Please check for the newest version here if you want:"));
-                Bukkit.getOnlinePlayers().stream().filter(ServerOperator::isOp).forEach(operator -> operator.sendMessage("§b§nhttps://github.com/NotDefined67/TrollingFreedomReborn"));
+                Bukkit.getOnlinePlayers().stream().filter(ServerOperator::isOp).forEach(op -> {
+                    op.sendMessage(ChatColor.RED + "=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                    op.sendMessage(ChatColor.RED + "There is an update to Trolling Freedom Reborn!");
+                    op.sendMessage(ChatColor.RED + "Please check spigot page, modrinth page or github for updates for §bTrolling§3§lFreedomReborn");
+                    op.sendMessage(ChatColor.LIGHT_PURPLE + "Github: §nhttps://github.com/NotDefined67/TrollingFreedomReborn");
+                    op.sendMessage(ChatColor.LIGHT_PURPLE + "Spigot: §nhttps://www.spigotmc.org/resources/.131388/");
+                    op.sendMessage(ChatColor.LIGHT_PURPLE + "Modrinth: §nhttps://modrinth.com/plugin/trollingfreedomreborn");
+                    op.sendMessage(ChatColor.RED + "=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+                });
             }
         });
     }
