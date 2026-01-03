@@ -82,7 +82,7 @@ You are welcome to fork and take the project from here on as long as you give th
 ---
 
 ## 🔧 CHANGELOG
-!CHANGELOG(CHANGELOG.md)
+[CHANGELOG](CHANGELOG.md)
 
 ## 🔧 Maintenance Note
 I decided to fork and maintain this when I needed to use it myself. I'll be honest: I don't understand half the things in this plugin! I haven't coded in a long time, so a significant portion of the logic was AI-generated. 
