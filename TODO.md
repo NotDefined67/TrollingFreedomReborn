@@ -14,6 +14,6 @@
 - [ ] Fix the World Loading system properly.
 - [ ] Fix the Herobrine troll and make it clean.
 - [ ] Add blocklist to config.yml for safety
-- [x] Fix update checker using https://www.spigotmc.org/resources/⭐-trollingfreedomreborn-⭐-1-free-troll-plugin-with-gui.131388/
+- [X] Fix update checker using https://www.spigotmc.org/resources/⭐-trollingfreedomreborn-⭐-1-free-troll-plugin-with-gui.131388/
 
 ---
