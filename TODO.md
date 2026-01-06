@@ -9,15 +9,15 @@
 
 ### ✅ To-Do List
 - [ ] Rename variables to be human-readable.
-- [ ] Refactor file structure into a well-organized package system.
+- [X] Refactor file structure into a well-organized package system.
 - [ ] Optimize performance and listener efficiency.
 - [ ] Optimize non-one-time trolls for lag purposes
 - [ ] Fix the World Loading system properly.
 - [ ] Make it such that all trolls as defined in the withCMD class and called from inventory classes to enure message uniformity like untroll
 - [ ] Fix the Herobrine troll and make it clean.
-- [ ] Swap recipe, and block crafting , 
+- [ ] block crafting troll, 
 - [X] Add blocklist to config.yml for safety
 - [X] Fix update checker using https://www.spigotmc.org/resources/⭐-trollingfreedomreborn-⭐-1-free-troll-plugin-with-gui.131388/
-- [ ] Add Change crafting recipe troll (changes crafting recipe to give random items)
+- [X] Add Change crafting recipe troll (changes crafting recipe to give random items)
 
 ---
