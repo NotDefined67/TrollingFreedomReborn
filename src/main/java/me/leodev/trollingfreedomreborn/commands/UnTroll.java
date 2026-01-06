@@ -312,7 +312,7 @@ public class UnTroll implements CommandExecutor, TabCompleter {
         // Handles removing players from ArrayLists or reversing state changes
         switch (name) {
             // --- Page 1 ---
-            case "annoy": break; // Repeating task handled in Step 1
+            case "annoy": Annoy.stopAnnoy(victim); break; // Repeating task handled in Step 1
             case "anvildrop": break; // Repeating task handled in Step 1
             case "aquaphobia": new Aquaphobia().unAqua(victim); break;
             case "bedexplosion": new BedExplosion().UnBedExplosion(victim); break;

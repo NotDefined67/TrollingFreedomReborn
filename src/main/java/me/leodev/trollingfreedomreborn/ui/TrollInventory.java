@@ -20,6 +20,7 @@ import me.leodev.trollingfreedomreborn.trolls.random.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -108,23 +109,23 @@ public class TrollInventory implements Listener, InventoryHolder {
         for (Integer i = 0; i < 45; i++) {
             inv.setItem(i, plc);
         }
+        inv.setItem(13, createGuiItem(XMaterial.VILLAGER_SPAWN_EGG, Core.isTrollActive(VictimPlayer, "annoy"), Core.tcc(Core.instance.getConfig().getString("items.annoy-name")), Core.tcc(Core.instance.getConfig().getString("items.annoy-lore"))));
+        inv.setItem(15, createGuiItem(XMaterial.WATER_BUCKET, Core.isTrollActive(VictimPlayer, "aquaphobia"), Core.tcc(Core.instance.getConfig().getString("items.aquaphobia-name")), Core.tcc(Core.instance.getConfig().getString("items.aquaphobia-lore"))));
+        inv.setItem(16, createGuiItem(XMaterial.WHITE_BED, Core.isTrollActive(VictimPlayer, "bedexplosion"), Core.tcc(Core.instance.getConfig().getString("items.bedexplosion-name")), Core.tcc(Core.instance.getConfig().getString("items.bedexplosion-lore"))));
+        inv.setItem(20, createGuiItem(XMaterial.WOODEN_PICKAXE, Core.isTrollActive(VictimPlayer, "stopblockbreakplace"), Core.tcc(Core.instance.getConfig().getString("items.break-name")), Core.tcc(Core.instance.getConfig().getString("items.break-lore"))));
+        inv.setItem(21, createGuiItem(XMaterial.GLASS, Core.isTrollActive(VictimPlayer, "cage"), Core.tcc(Core.instance.getConfig().getString("items.cage-name")), Core.tcc(Core.instance.getConfig().getString("items.cage-lore"))));
+        inv.setItem(23, createGuiItem(XMaterial.PAPER, Core.isTrollActive(VictimPlayer, "randomchat"), Core.tcc(Core.instance.getConfig().getString("items.chatchange-name")), Core.tcc(Core.instance.getConfig().getString("items.chatchange-lore"))));
+        inv.setItem(29, createGuiItem(XMaterial.CARROT, Core.isTrollActive(VictimPlayer, "entitymultiply"), Core.tcc(Core.instance.getConfig().getString("items.entitymultiply-name")), Core.tcc(Core.instance.getConfig().getString("items.entitymultiply-lore"))));
+        inv.setItem(30, createGuiItem(XMaterial.CREEPER_HEAD, Core.isTrollActive(VictimPlayer, "creeperawman"), Core.tcc(Core.instance.getConfig().getString("items.creeperawman-name")), Core.tcc(Core.instance.getConfig().getString("items.creeperawman-lore"))));
+        inv.setItem(31, createGuiItem(XMaterial.PAPER, Core.isTrollActive(VictimPlayer, "deafen"), Core.tcc(Core.instance.getConfig().getString("items.deafen-name")), Core.tcc(Core.instance.getConfig().getString("items.deafen-lore"))));
         inv.setItem(10, createGuiItem(XMaterial.WHITE_WOOL, false, Core.tcc(Core.instance.getConfig().getString("items.afk-name")), Core.tcc(Core.instance.getConfig().getString("items.afk-lore"))));
         inv.setItem(11, createGuiItem(XMaterial.RED_WOOL, false, Core.tcc(Core.instance.getConfig().getString("items.unafk-name")), Core.tcc(Core.instance.getConfig().getString("items.unafk-lore"))));
         inv.setItem(12, createGuiItem(XMaterial.DIAMOND_SWORD, false, Core.tcc(Core.instance.getConfig().getString("items.entitydie-name")), Core.tcc(Core.instance.getConfig().getString("items.entitydie-lore"))));
-        inv.setItem(13, createGuiItem(XMaterial.VILLAGER_SPAWN_EGG, false, Core.tcc(Core.instance.getConfig().getString("items.annoy-name")), Core.tcc(Core.instance.getConfig().getString("items.annoy-lore"))));
         inv.setItem(14, createGuiItem(XMaterial.ANVIL, false, Core.tcc(Core.instance.getConfig().getString("items.anvildrop-name")), Core.tcc(Core.instance.getConfig().getString("items.anvildrop-lore"))));
-        inv.setItem(15, createGuiItem(XMaterial.WATER_BUCKET, false, Core.tcc(Core.instance.getConfig().getString("items.aquaphobia-name")), Core.tcc(Core.instance.getConfig().getString("items.aquaphobia-lore"))));
-        inv.setItem(16, createGuiItem(XMaterial.WHITE_BED, false, Core.tcc(Core.instance.getConfig().getString("items.bedexplosion-name")), Core.tcc(Core.instance.getConfig().getString("items.bedexplosion-lore"))));
         inv.setItem(19, createGuiItem(XMaterial.RED_BED, false, Core.tcc(Core.instance.getConfig().getString("items.bedmissing-name")), Core.tcc(Core.instance.getConfig().getString("items.bedmissing-lore"))));
-        inv.setItem(20, createGuiItem(XMaterial.WOODEN_PICKAXE, false, Core.tcc(Core.instance.getConfig().getString("items.break-name")), Core.tcc(Core.instance.getConfig().getString("items.break-lore"))));
-        inv.setItem(21, createGuiItem(XMaterial.GLASS, false, Core.tcc(Core.instance.getConfig().getString("items.cage-name")), Core.tcc(Core.instance.getConfig().getString("items.cage-lore"))));
         inv.setItem(22, createGuiItem(XMaterial.STONE, false, Core.tcc(Core.instance.getConfig().getString("items.cavesounds-name")), Core.tcc(Core.instance.getConfig().getString("items.cavesounds-lore"))));
-        inv.setItem(23, createGuiItem(XMaterial.PAPER, false, Core.tcc(Core.instance.getConfig().getString("items.chatchange-name")), Core.tcc(Core.instance.getConfig().getString("items.chatchange-lore"))));
         inv.setItem(24, createGuiItem(XMaterial.WITHER_SKELETON_SKULL, false, Core.tcc(Core.instance.getConfig().getString("items.coffin-name")), Core.tcc(Core.instance.getConfig().getString("items.coffin-lore"))));
         inv.setItem(25, createGuiItem(XMaterial.IRON_BARS, false, Core.tcc(Core.instance.getConfig().getString("items.credits-name")), Core.tcc(Core.instance.getConfig().getString("items.credits-lore"))));
-        inv.setItem(29, createGuiItem(XMaterial.CARROT, false, Core.tcc(Core.instance.getConfig().getString("items.entitymultiply-name")), Core.tcc(Core.instance.getConfig().getString("items.entitymultiply-lore"))));
-        inv.setItem(30, createGuiItem(XMaterial.CREEPER_HEAD, false, Core.tcc(Core.instance.getConfig().getString("items.creeperawman-name")), Core.tcc(Core.instance.getConfig().getString("items.creeperawman-lore"))));
-        inv.setItem(31, createGuiItem(XMaterial.PAPER, false, Core.tcc(Core.instance.getConfig().getString("items.deafen-name")), Core.tcc(Core.instance.getConfig().getString("items.deafen-lore"))));
         inv.setItem(32, createGuiItem(XMaterial.IRON_BARS, false, Core.tcc(Core.instance.getConfig().getString("items.demo-name")), Core.tcc(Core.instance.getConfig().getString("items.demo-lore"))));
         inv.setItem(33, createGuiItem(XMaterial.ICE, false, Core.tcc(Core.instance.getConfig().getString("items.dropall-name")), Core.tcc(Core.instance.getConfig().getString("items.dropall-lore"))));
 
@@ -138,15 +139,9 @@ public class TrollInventory implements Listener, InventoryHolder {
         inv.setItem(44, secondPage);
     }
 
-    protected ItemStack createGuiItem(final XMaterial xmat, final Boolean isEnchanted, final String name, final String... lore) {
-        // 1. Convert XMaterial to a Bukkit Material
+    protected ItemStack createGuiItem(final XMaterial xmat, final boolean isEnchanted, final String name, final String... lore) {
         org.bukkit.Material material = xmat.parseMaterial();
-
-        // 2. Safety check: If XMaterial fails (common in new MC versions), use BARRIER
-        if (material == null) {
-            Bukkit.getLogger().warning("[TFR] Material not found for: " + xmat.name() + ". Using BARRIER.");
-            material = org.bukkit.Material.BARRIER;
-        }
+        if (material == null) material = org.bukkit.Material.BARRIER;
 
         final ItemStack item = new ItemStack(material, 1);
         final ItemMeta meta = item.getItemMeta();
@@ -154,31 +149,25 @@ public class TrollInventory implements Listener, InventoryHolder {
         if (meta != null) {
             meta.setDisplayName(name);
 
-            // 3. Handle Enchantment safely (Durability = Unbreaking)
             if (isEnchanted) {
-                org.bukkit.enchantments.Enchantment dur = org.bukkit.enchantments.Enchantment.UNBREAKING;
-                if (XEnchantment.UNBREAKING.getEnchant() != null) {
-                    dur = XEnchantment.UNBREAKING.getEnchant();
-                }
-                meta.addEnchant(dur, 1, true);
+                meta.addEnchant(Enchantment.UNBREAKING, 1, true);
                 meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             }
-            List<String> itemLore = new java.util.ArrayList<>(); // Create the variable here
 
+            List<String> itemLore = new java.util.ArrayList<>();
             if (lore != null) {
-                itemLore.addAll(Arrays.asList(lore)); // Add the config lore to our new list
+                itemLore.addAll(Arrays.asList(lore));
             }
 
-            itemLore.add(" "); // Empty line
-            itemLore.add("§eLeft Click to enable");
+            itemLore.add(" ");
+            itemLore.add(isEnchanted ? "§a§l▶ STATUS: ACTIVE" : "§eLeft Click to enable");
             itemLore.add("§dRight Click to disable");
-            itemLore.add(" "); 
-            itemLore.add("§eStop all troll in case of any bug");
+            itemLore.add(" ");
+            itemLore.add("§8§oStop all trolls if bugs occur");
 
-            meta.setLore(itemLore); // Set the NEW list to the meta
+            meta.setLore(itemLore);
             item.setItemMeta(meta);
         }
-
         return item;
     }
 
@@ -399,6 +388,10 @@ public class TrollInventory implements Listener, InventoryHolder {
                     }
                 }
             }
+            initializeItems();
+
+            // 2. Force the player's client to visual sync the changes
+            p.updateInventory();
         }
     }
 }

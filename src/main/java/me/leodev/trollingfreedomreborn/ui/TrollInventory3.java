@@ -17,6 +17,7 @@ import me.leodev.trollingfreedomreborn.trolls.random.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -109,24 +110,25 @@ public class TrollInventory3 implements Listener, InventoryHolder {
         }
 
         inv.setItem(0,mainPage);
+        inv.setItem(12, createGuiItem(XMaterial.FLINT_AND_STEEL, Core.isTrollActive(VictimPlayer, "burn"), Core.tcc(Core.instance.getConfig().getString("items.burn-name")), Core.tcc(Core.instance.getConfig().getString("items.burn-lore"))));
+        inv.setItem(13, createGuiItem(XMaterial.POTATO, Core.isTrollActive(VictimPlayer, "potato"), Core.tcc(Core.instance.getConfig().getString("items.potato-name")), Core.tcc(Core.instance.getConfig().getString("items.potato-lore"))));
+        inv.setItem(14, createGuiItem(XMaterial.CARVED_PUMPKIN, Core.isTrollActive(VictimPlayer, "pumpkin"), Core.tcc(Core.instance.getConfig().getString("items.pumpkin-name")), Core.tcc(Core.instance.getConfig().getString("items.pumpkin-lore"))));
+        inv.setItem(15, createGuiItem(XMaterial.DIRT, Core.isTrollActive(VictimPlayer, "rainitems"), Core.tcc(Core.instance.getConfig().getString("items.rainitems-name")), Core.tcc(Core.instance.getConfig().getString("items.rainitems-lore"))));
+        inv.setItem(16, createGuiItem(XMaterial.CHEST, Core.isTrollActive(VictimPlayer, "randominv"), Core.tcc(Core.instance.getConfig().getString("items.randominv-name")), Core.tcc(Core.instance.getConfig().getString("items.randominv-lore"))));
+        inv.setItem(19, createGuiItem(XMaterial.REDSTONE, Core.isTrollActive(VictimPlayer, "randomparticle"), Core.tcc(Core.instance.getConfig().getString("items.randomparticle-name")), Core.tcc(Core.instance.getConfig().getString("items.randomparticle-lore"))));
+        inv.setItem(21, createGuiItem(XMaterial.ENCHANTED_GOLDEN_APPLE, Core.isTrollActive(VictimPlayer, "rickroll"), Core.tcc(Core.instance.getConfig().getString("items.rickroll-name")), Core.tcc(Core.instance.getConfig().getString("items.rickroll-lore"))));
+        inv.setItem(22, createGuiItem(XMaterial.SILVERFISH_SPAWN_EGG, Core.isTrollActive(VictimPlayer, "silverfish"), Core.tcc(Core.instance.getConfig().getString("items.silverfish-name")), Core.tcc(Core.instance.getConfig().getString("items.silverfish-lore"))));
+        inv.setItem(23, createGuiItem(XMaterial.ENDERMAN_SPAWN_EGG, Core.isTrollActive(VictimPlayer, "slenderman"), Core.tcc(Core.instance.getConfig().getString("items.slenderman-name")), Core.tcc(Core.instance.getConfig().getString("items.slenderman-lore"))));
+        inv.setItem(25, createGuiItem(XMaterial.DIAMOND_PICKAXE, Core.isTrollActive(VictimPlayer, "sneakdestroy"), Core.tcc(Core.instance.getConfig().getString("items.sneakdestroy-name")), Core.tcc(Core.instance.getConfig().getString("items.sneakdestroy-lore"))));
+        inv.setItem(30, createGuiItem(XMaterial.POTION, Core.isTrollActive(VictimPlayer, "spin"), Core.tcc(Core.instance.getConfig().getString("items.spin-name")), Core.tcc(Core.instance.getConfig().getString("items.spin-lore"))));
+        inv.setItem(31, createGuiItem(XMaterial.POISONOUS_POTATO, Core.isTrollActive(VictimPlayer, "starve"), Core.tcc(Core.instance.getConfig().getString("items.starve-name")), Core.tcc(Core.instance.getConfig().getString("items.starve-lore"))));
+        inv.setItem(32, createGuiItem(XMaterial.CLOCK, Core.isTrollActive(VictimPlayer, "skyflash"), Core.tcc(Core.instance.getConfig().getString("items.timeflash-name")), Core.tcc(Core.instance.getConfig().getString("items.timeflash-lore"))));
+
         inv.setItem(10, createGuiItem(XMaterial.OAK_DOOR, false, Core.tcc(Core.instance.getConfig().getString("items.fakeclose-name")), Core.tcc(Core.instance.getConfig().getString("items.fakeclose-lore"))));
         inv.setItem(11, createGuiItem(XMaterial.IRON_DOOR, false, Core.tcc(Core.instance.getConfig().getString("items.fakeban-name")), Core.tcc(Core.instance.getConfig().getString("items.fakeban-lore"))));
-        inv.setItem(12, createGuiItem(XMaterial.FLINT_AND_STEEL, false, Core.tcc(Core.instance.getConfig().getString("items.burn-name")), Core.tcc(Core.instance.getConfig().getString("items.burn-lore"))));
-        inv.setItem(13, createGuiItem(XMaterial.POTATO, false, Core.tcc(Core.instance.getConfig().getString("items.potato-name")), Core.tcc(Core.instance.getConfig().getString("items.potato-lore"))));
-        inv.setItem(14, createGuiItem(XMaterial.CARVED_PUMPKIN, false, Core.tcc(Core.instance.getConfig().getString("items.pumpkin-name")), Core.tcc(Core.instance.getConfig().getString("items.pumpkin-lore"))));
-        inv.setItem(15, createGuiItem(XMaterial.DIRT, false, Core.tcc(Core.instance.getConfig().getString("items.rainitems-name")), Core.tcc(Core.instance.getConfig().getString("items.rainitems-lore"))));
-        inv.setItem(16, createGuiItem(XMaterial.CHEST, false, Core.tcc(Core.instance.getConfig().getString("items.randominv-name")), Core.tcc(Core.instance.getConfig().getString("items.randominv-lore"))));
-        inv.setItem(19, createGuiItem(XMaterial.REDSTONE, false, Core.tcc(Core.instance.getConfig().getString("items.randomparticle-name")), Core.tcc(Core.instance.getConfig().getString("items.randomparticle-lore"))));
         inv.setItem(20, createGuiItem(XMaterial.ENDER_PEARL, false, Core.tcc(Core.instance.getConfig().getString("items.randomtp-name") + "§o§1 WARNING: MIGHT CAUSE THE SERVER TO LAG!"), Core.tcc(Core.instance.getConfig().getString("items.randomtp-lore"))));
-        inv.setItem(21, createGuiItem(XMaterial.ENCHANTED_GOLDEN_APPLE, false, Core.tcc(Core.instance.getConfig().getString("items.rickroll-name")), Core.tcc(Core.instance.getConfig().getString("items.rickroll-lore"))));
-        inv.setItem(22, createGuiItem(XMaterial.SILVERFISH_SPAWN_EGG, false, Core.tcc(Core.instance.getConfig().getString("items.silverfish-name")), Core.tcc(Core.instance.getConfig().getString("items.silverfish-lore"))));
-        inv.setItem(23, createGuiItem(XMaterial.ENDERMAN_SPAWN_EGG, false, Core.tcc(Core.instance.getConfig().getString("items.slenderman-name")), Core.tcc(Core.instance.getConfig().getString("items.slenderman-lore"))));
         inv.setItem(24, createGuiItem(XMaterial.PACKED_ICE, false, Core.tcc(Core.instance.getConfig().getString("items.slipperyhands-name")), Core.tcc(Core.instance.getConfig().getString("items.slipperyhands-lore"))));
-        inv.setItem(25, createGuiItem(XMaterial.DIAMOND_PICKAXE, false, Core.tcc(Core.instance.getConfig().getString("items.sneakdestroy-name")), Core.tcc(Core.instance.getConfig().getString("items.sneakdestroy-lore"))));
         inv.setItem(29, createGuiItem(XMaterial.PUMPKIN, false, Core.tcc(Core.instance.getConfig().getString("items.snowman-name")), Core.tcc(Core.instance.getConfig().getString("items.snowman-lore"))));
-        inv.setItem(30, createGuiItem(XMaterial.POTION, false, Core.tcc(Core.instance.getConfig().getString("items.spin-name")), Core.tcc(Core.instance.getConfig().getString("items.spin-lore"))));
-        inv.setItem(31, createGuiItem(XMaterial.POISONOUS_POTATO, false, Core.tcc(Core.instance.getConfig().getString("items.starve-name")), Core.tcc(Core.instance.getConfig().getString("items.starve-lore"))));
-        inv.setItem(32, createGuiItem(XMaterial.CLOCK, false, Core.tcc(Core.instance.getConfig().getString("items.timeflash-name")), Core.tcc(Core.instance.getConfig().getString("items.timeflash-lore"))));
         inv.setItem(33, createGuiItem(XMaterial.TNT, false, Core.tcc(Core.instance.getConfig().getString("items.tnt-name")), Core.tcc(Core.instance.getConfig().getString("items.tnt-lore"))));
 
         //inv.setItem(36, mainPage);
@@ -138,15 +140,9 @@ public class TrollInventory3 implements Listener, InventoryHolder {
         inv.setItem(44, secondPage);
     }
 
-    protected ItemStack createGuiItem(final XMaterial xmat, final Boolean isEnchanted, final String name, final String... lore) {
-        // 1. Convert XMaterial to a Bukkit Material
+    protected ItemStack createGuiItem(final XMaterial xmat, final boolean isEnchanted, final String name, final String... lore) {
         org.bukkit.Material material = xmat.parseMaterial();
-
-        // 2. Safety check: If XMaterial fails (common in new MC versions), use BARRIER
-        if (material == null) {
-            Bukkit.getLogger().warning("[TFR] Material not found for: " + xmat.name() + ". Using BARRIER.");
-            material = org.bukkit.Material.BARRIER;
-        }
+        if (material == null) material = org.bukkit.Material.BARRIER;
 
         final ItemStack item = new ItemStack(material, 1);
         final ItemMeta meta = item.getItemMeta();
@@ -154,33 +150,25 @@ public class TrollInventory3 implements Listener, InventoryHolder {
         if (meta != null) {
             meta.setDisplayName(name);
 
-            // 3. Handle Enchantment safely (Durability = Unbreaking)
             if (isEnchanted) {
-                org.bukkit.enchantments.Enchantment dur = org.bukkit.enchantments.Enchantment.UNBREAKING;
-                if (XEnchantment.UNBREAKING.getEnchant() != null) {
-                    dur = XEnchantment.UNBREAKING.getEnchant();
-                }
-                meta.addEnchant(dur, 1, true);
+                meta.addEnchant(Enchantment.UNBREAKING, 1, true);
                 meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             }
 
-            // 4. Handle Lore safely
-            List<String> itemLore = new java.util.ArrayList<>(); // Create the variable here
-
+            List<String> itemLore = new java.util.ArrayList<>();
             if (lore != null) {
-                itemLore.addAll(Arrays.asList(lore)); // Add the config lore to our new list
+                itemLore.addAll(Arrays.asList(lore));
             }
 
-            itemLore.add(" "); // Empty line
-            itemLore.add("§eLeft Click to enable");
+            itemLore.add(" ");
+            itemLore.add(isEnchanted ? "§a§l▶ STATUS: ACTIVE" : "§eLeft Click to enable");
             itemLore.add("§dRight Click to disable");
-            itemLore.add(" "); 
-            itemLore.add("§eStop all troll in case of any bug");
+            itemLore.add(" ");
+            itemLore.add("§8§oStop all trolls if bugs occur");
 
-            meta.setLore(itemLore); // Set the NEW list to the meta
+            meta.setLore(itemLore);
             item.setItemMeta(meta);
         }
-
         return item;
     }
 
@@ -402,6 +390,10 @@ public class TrollInventory3 implements Listener, InventoryHolder {
                     }
                 }
             }
+            initializeItems();
+
+            // 2. Force the player's client to visual sync the changes
+            p.updateInventory();
         }
     }
 }

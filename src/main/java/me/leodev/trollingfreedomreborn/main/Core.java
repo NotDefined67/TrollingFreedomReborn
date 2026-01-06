@@ -312,4 +312,51 @@ public class Core extends JavaPlugin implements Listener {
         // Save again to write the comments
         saveConfig();
     }
+    public static boolean isTrollActive(Player t, String trollKey) {
+        if (t == null) return false;
+        String name = t.getName();
+        switch (trollKey.toLowerCase()) {
+            case "annoy": return me.leodev.trollingfreedomreborn.trolls.random.Annoy.Annoy1.contains(name);
+            case "aquaphobia": return me.leodev.trollingfreedomreborn.trolls.random.Aquaphobia.Aqua1.contains(name);
+            case "bedexplosion": return me.leodev.trollingfreedomreborn.trolls.Beds.BedExplosion.Explode1.contains(name);
+            case "stopblockbreakplace": return me.leodev.trollingfreedomreborn.trolls.random.Break.Break1.contains(name);
+            case "cage": return me.leodev.trollingfreedomreborn.trolls.movement.Cage.Cage1.contains(name);
+            case "randomchat": return me.leodev.trollingfreedomreborn.trolls.chat.ChatChange.Chat1.contains(name);
+            case "entitymultiply": return me.leodev.trollingfreedomreborn.trolls.random.EntityMultiply.EntityMultiply1.contains(name);
+            case "creeperawman": return me.leodev.trollingfreedomreborn.trolls.classics.CreeperAwMan.Creeper1.contains(name);
+            case "deafen": return me.leodev.trollingfreedomreborn.trolls.chat.Deafen.Deaf1.contains(name);
+            case "forcejump": return me.leodev.trollingfreedomreborn.trolls.movement.ForceJump.Jump1.contains(name);
+            case "freeze": return me.leodev.trollingfreedomreborn.trolls.movement.Freeze.frozen.contains(name);
+            case "hideallplayers": return me.leodev.trollingfreedomreborn.trolls.random.HideAllPlayers.hide1.contains(name);
+            case "instatoolbreak": return me.leodev.trollingfreedomreborn.trolls.random.InstaToolBreak.InstaToolBreak1.contains(name);
+            case "inventorystop": return me.leodev.trollingfreedomreborn.trolls.inventory.InventoryStop.InvStop1.contains(name);
+            case "kittycannon": return me.leodev.trollingfreedomreborn.trolls.explosion.KittyCannon.Kitty1.contains(name);
+            case "lightning": return me.leodev.trollingfreedomreborn.trolls.movement.Lightning.Lightning1.contains(name);
+            case "nick": return me.leodev.trollingfreedomreborn.trolls.chat.Nick.Nick1.contains(name);
+            case "burn": return t.getFireTicks() > 0;
+            case "potato": return me.leodev.trollingfreedomreborn.trolls.random.Potato.Break1.contains(name);
+            case "pumpkin": return me.leodev.trollingfreedomreborn.trolls.classics.Pumpkin.Pumpkin1.contains(name);
+            case "rainitems": return me.leodev.trollingfreedomreborn.trolls.random.RainItems.Rain1.contains(name);
+            case "randominv": return me.leodev.trollingfreedomreborn.trolls.inventory.RandomInv.RandomInv1.contains(name);
+            case "randomparticle": return me.leodev.trollingfreedomreborn.trolls.random.RandomParticle.RandomParticle1.contains(name);
+            case "rickroll": return me.leodev.trollingfreedomreborn.trolls.classics.RickRoll.Rick1.contains(name);
+            case "silverfish": return me.leodev.trollingfreedomreborn.trolls.random.Silverfish.Fish1.contains(name);
+            case "slenderman": return me.leodev.trollingfreedomreborn.trolls.classics.Slenderman.Slender1.contains(name);
+            case "sneakdestroy": return me.leodev.trollingfreedomreborn.trolls.movement.SneakDestroy.Sneak1.contains(name);
+            case "spin": return me.leodev.trollingfreedomreborn.trolls.classics.Spin.spin1.contains(name);
+            case "starve": return me.leodev.trollingfreedomreborn.trolls.random.Starve.starve1.contains(name);
+            case "skyflash": return me.leodev.trollingfreedomreborn.trolls.random.TimeFlash.flash1.contains(name);
+            case "tntplace": return me.leodev.trollingfreedomreborn.trolls.explosion.TNTPlace.Fireball1.contains(name);
+            case "vomit": return me.leodev.trollingfreedomreborn.trolls.random.Vomit.Vomit1.contains(name);
+            case "explodeonchat": return me.leodev.trollingfreedomreborn.trolls.chat.ExplodeOnChat.Chat1.contains(name);
+            case "inventoryrave": return me.leodev.trollingfreedomreborn.trolls.inventory.InventoryRave.Rave1.contains(name);
+            case "invert": return me.leodev.trollingfreedomreborn.trolls.movement.InvertWalk.Invert1.contains(name);
+            case "stopsleep": return me.leodev.trollingfreedomreborn.trolls.Beds.BedNight.Bed1.contains(name);
+            case "reversemessage": return me.leodev.trollingfreedomreborn.trolls.chat.ReverseMessage.Reverse1.contains(name);
+            case "poop": return me.leodev.trollingfreedomreborn.trolls.random.Poop.Poop1.contains(name);
+            case "ringoffire": return me.leodev.trollingfreedomreborn.trolls.random.RingOfFire.nuke1.contains(name);
+            case "randomcraft": return me.leodev.trollingfreedomreborn.trolls.random.RandomCrafts.randomcraft.contains(name);
+            default: return false;
+        }
+    }
 }
