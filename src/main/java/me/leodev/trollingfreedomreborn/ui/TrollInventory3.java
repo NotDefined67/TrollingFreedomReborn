@@ -4,6 +4,16 @@ import me.leodev.trollingfreedomreborn.commands.*;
 import me.leodev.trollingfreedomreborn.main.Core;
 import com.cryptomorin.xseries.XEnchantment;
 import com.cryptomorin.xseries.XMaterial;
+import me.leodev.trollingfreedomreborn.trolls.classics.Pumpkin;
+import me.leodev.trollingfreedomreborn.trolls.classics.RickRoll;
+import me.leodev.trollingfreedomreborn.trolls.classics.Slenderman;
+import me.leodev.trollingfreedomreborn.trolls.classics.Spin;
+import me.leodev.trollingfreedomreborn.trolls.explosion.Snowman;
+import me.leodev.trollingfreedomreborn.trolls.explosion.TNT;
+import me.leodev.trollingfreedomreborn.trolls.fakestuff.FakeKicks;
+import me.leodev.trollingfreedomreborn.trolls.inventory.RandomInv;
+import me.leodev.trollingfreedomreborn.trolls.movement.SneakDestroy;
+import me.leodev.trollingfreedomreborn.trolls.random.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -229,16 +239,16 @@ public class TrollInventory3 implements Listener, InventoryHolder {
                     }
                     switch (e.getRawSlot()) {
                         case 10:
-                            FakeCrash troll = new FakeCrash();
-                            FakeCrash.FakeClosed(VictimPlayer);
+                            FakeKicks troll = new FakeKicks();
+                            FakeKicks.FakeClosed(VictimPlayer);
                             break;
                         case 11:
-                            FakeCrash troll2 = new FakeCrash();
-                            FakeCrash.FakeBan(VictimPlayer);
+                            FakeKicks troll2 = new FakeKicks();
+                            FakeKicks.FakeBan(VictimPlayer);
                             break;
                         case 12:
-                            FakeCrash troll3 = new FakeCrash();
-                            FakeCrash.Burn(VictimPlayer);
+                            Burn troll3 = new Burn();
+                            Burn.Burn(VictimPlayer);
                             break;
                         case 13:
                             Potato troll4 = new Potato();
@@ -326,9 +336,6 @@ public class TrollInventory3 implements Listener, InventoryHolder {
                             break;
                     }
                 }else if (e.isRightClick()){
-                    if (e.getRawSlot() < 36) {
-                        notifyUnTroller(p, clickedItem);
-                    }
                     switch (e.getRawSlot()) {
                         case 12:
                             stoptroll.stopSpecificTroll(VictimPlayer, "burn", p);

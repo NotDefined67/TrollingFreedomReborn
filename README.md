@@ -22,6 +22,7 @@
 ### 📦 Dependencies
 * **ProtocolLib** (Required)
 * **EssentialsX** (Useful)
+* **SkinRestorer** (Optional, gives better experience on cracked servers)
 * **Citizens2** (Required only for the Herobrine troll)
 
 ### 🖱️ The Troll Menu

@@ -4,6 +4,19 @@ import me.leodev.trollingfreedomreborn.commands.*;
 import me.leodev.trollingfreedomreborn.main.Core;
 import com.cryptomorin.xseries.XEnchantment;
 import com.cryptomorin.xseries.XMaterial;
+import me.leodev.trollingfreedomreborn.trolls.Beds.BedExplosion;
+import me.leodev.trollingfreedomreborn.trolls.Beds.BedMissing;
+import me.leodev.trollingfreedomreborn.trolls.chat.ChatChange;
+import me.leodev.trollingfreedomreborn.trolls.chat.Deafen;
+import me.leodev.trollingfreedomreborn.trolls.classics.AnvilDrop;
+import me.leodev.trollingfreedomreborn.trolls.classics.Coffin;
+import me.leodev.trollingfreedomreborn.trolls.classics.CreeperAwMan;
+import me.leodev.trollingfreedomreborn.trolls.inventory.DropAll;
+import me.leodev.trollingfreedomreborn.trolls.movement.AFK;
+import me.leodev.trollingfreedomreborn.trolls.movement.Cage;
+import me.leodev.trollingfreedomreborn.trolls.packettrolls.Credits;
+import me.leodev.trollingfreedomreborn.trolls.packettrolls.Demo;
+import me.leodev.trollingfreedomreborn.trolls.random.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -264,8 +277,8 @@ public class TrollInventory implements Listener, InventoryHolder {
                             troll10.Cage(VictimPlayer);
                             break;
                         case 22:
-                            CaveSounds troll11 = new CaveSounds();
-                            CaveSounds.CaveSound(VictimPlayer);
+                            Sounds troll11 = new Sounds();
+                            Sounds.CaveSound(VictimPlayer);
                             break;
                         case 23:
                             ChatChange troll12 = new ChatChange();
@@ -330,9 +343,6 @@ public class TrollInventory implements Listener, InventoryHolder {
                             break;
                     }
                 } else if (e.isRightClick()){
-                    if (e.getRawSlot() < 36) {
-                        notifyUnTroller(p, clickedItem);
-                    }
                     switch (e.getRawSlot()) {
                         case 13:
                             stoptroll.stopSpecificTroll(VictimPlayer, "annoy", p);

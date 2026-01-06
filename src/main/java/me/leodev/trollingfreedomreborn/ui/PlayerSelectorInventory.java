@@ -18,8 +18,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class PlayerSelectorInventory implements InventoryHolder, Listener {
 
@@ -109,12 +111,36 @@ public class PlayerSelectorInventory implements InventoryHolder, Listener {
 
             // Set the lore of the item
             SkullMeta skullMeta = (SkullMeta) item.getItemMeta();
-            skullMeta.setOwningPlayer(Bukkit.getOfflinePlayer(o.getUniqueId()));
+            skullMeta.setOwner(o.getName());
             skullMeta.setDisplayName(o.getName());
+            List<String> lore = new ArrayList<>();
             if (o.isOp()) {
-                skullMeta.setLore(Collections.singletonList(Core.getPathCC("items.messages.isOP")));
+
+                lore.add(Core.getPathCC("items.messages.isOP"));
+                if (!Core.canTroll(o)) {
+                    lore.add(" ");
+                    lore.add("§c§lPROTECTED");
+                    lore.add("§7You cannot troll this player.");
+                } else {
+                    lore.add(" ");
+                    lore.add("§a§lVULNERABLE");
+
+                    lore.add("§7Click to open troll menu.");
+                }
+            } else {
+                if (!Core.canTroll(o)) {
+                    lore.add("§c§lPROTECTED");
+                    lore.add("§7You cannot troll this player.");
+                } else {
+                    lore.add("§a§lVULNERABLE");
+                    lore.add("§7Click to open troll menu.");
+                }
             }
 
+
+            // Optional: Keep your isOP check
+
+            skullMeta.setLore(lore);
             item.setItemMeta(skullMeta);
             if (playersdone > inv.getSize() - 7) {
                 inv2.addItem(item);
@@ -170,6 +196,11 @@ public class PlayerSelectorInventory implements InventoryHolder, Listener {
             openUniInv(p, inv);
         }
         final Player Vic = Bukkit.getPlayerExact(clickedItem.getItemMeta().getDisplayName());
+        if (!Core.canTroll(Vic)) {
+            p.sendMessage("§cYou cannot troll this player!");
+            p.closeInventory();
+            return;
+        }
         if (Vic != null) {
             if (Vic instanceof Player) {
                 p.sendMessage("§b§lTFR §8| §7Selected §b" + Vic.getName() + " §7to troll.");

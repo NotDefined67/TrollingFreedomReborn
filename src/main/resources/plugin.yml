@@ -11,7 +11,7 @@ commands:
     aliases: [ tf ]
   trollgui:
     descrption: Troll GUI open
-    aliases: [ltroll,tgui, trollingfreedomgui, tfgui. tfl]
+    aliases: [ltroll,tgui, trollingfreedomgui, tfgui, tfl]
   untroll:
     description: Untroll player
     aliases: [ luntroll, stoptroll ]

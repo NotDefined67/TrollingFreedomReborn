@@ -1,6 +1,12 @@
 prefix: '&b&lTFR &8| &7'
 # For chat. + settings menu
 no-perms: '&b&lTFR &8| &7You have no permission to run this command'
+# Players in this list cannot be trolled
+blocklist:
+  - "LeoMadrassiDev"
+  - "Herobrine"
+# If true, Operators can be trolled. If false, they are protected.
+allow-troll-op: true
 # Chat massages
 cant-use-in-console: "&b&lTFR &8| &bYou cannot use this command in console"
 not-online: "&b&lTFR &8| &b%player% &3is not online"
@@ -261,6 +267,9 @@ items:
   ringoffire-name: '&e&lRing &c&lOF &6&lFIRE'
   ringoffire-lore: '&cRing of fire follows victim'
   #^ Ring Of Fire
+  randomcraft-name: '&eRandom Crafting'
+  randomcraft-lore: '&7Change recipe of your victim to something random'
+  #^ Random crafting recipe
 
   restart-name: '&cRestart the plugin'
   restart-lore: '&7Reloads the config.'
@@ -285,6 +294,7 @@ items:
   #Untroll all
   Untrollall-name: '&cStop All Trolls'
   Untrollall-lore: '&7Remove trolls from all players'
+
 
   # Messages that will apply on item lore:
   # Like if a player has OP.

@@ -1,11 +1,21 @@
 package me.leodev.trollingfreedomreborn.ui;
 
 import me.leodev.trollingfreedomreborn.commands.*;
-import me.leodev.trollingfreedomreborn.commands.Void;
 import me.leodev.trollingfreedomreborn.main.Core;
-import me.leodev.trollingfreedomreborn.other.ConfirmIH;
 import com.cryptomorin.xseries.XEnchantment;
 import com.cryptomorin.xseries.XMaterial;
+import me.leodev.trollingfreedomreborn.trolls.Beds.BedNight;
+import me.leodev.trollingfreedomreborn.trolls.random.*;
+import me.leodev.trollingfreedomreborn.trolls.chat.ExplodeOnChat;
+import me.leodev.trollingfreedomreborn.trolls.chat.ReverseMessage;
+import me.leodev.trollingfreedomreborn.trolls.explosion.TNT;
+import me.leodev.trollingfreedomreborn.trolls.explosion.TNTPlace;
+import me.leodev.trollingfreedomreborn.trolls.inventory.InventoryRave;
+import me.leodev.trollingfreedomreborn.trolls.movement.FreeFall;
+import me.leodev.trollingfreedomreborn.trolls.movement.InvertWalk;
+import me.leodev.trollingfreedomreborn.trolls.packettrolls.Guardian;
+import me.leodev.trollingfreedomreborn.trolls.packettrolls.WorldLoading;
+import me.leodev.trollingfreedomreborn.trolls.random.Void;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -24,6 +34,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.function.BiConsumer;
 
 public class TrollInventory4 implements Listener, InventoryHolder {
@@ -120,6 +131,19 @@ public class TrollInventory4 implements Listener, InventoryHolder {
         inv.setItem(30, createGuiItem(XMaterial.COCOA_BEANS, false, Core.tcc(Core.instance.getConfig().getString("items.poop-name")), Core.tcc(Core.instance.getConfig().getString("items.poop-lore"))));
         inv.setItem(31, createGuiItem(XMaterial.CARROT_ON_A_STICK, false, Core.tcc(Core.instance.getConfig().getString("items.control-name")), Core.tcc(Core.instance.getConfig().getString("items.control-lore"))));
         inv.setItem(32, createGuiItem(XMaterial.FLINT_AND_STEEL, false, Core.tcc(Core.instance.getConfig().getString("items.ringoffire-name")), Core.tcc(Core.instance.getConfig().getString("items.ringoffire-lore"))));
+        // 1. Get the name from config, fallback to '&eRandom Crafting'
+        String rcName = Core.instance.getConfig().getString("items.randomcraft-name", "&eRandom Crafting");
+
+// 2. Get the lore from config, fallback to '&7Change recipe of your victim to something random'
+        String rcLore = Core.instance.getConfig().getString("items.randomcraft-lore", "&7Change recipe of your victim to something random");
+
+// 3. Set the item in the inventory
+        inv.setItem(33, createGuiItem(
+                XMaterial.CRAFTING_TABLE,
+                false,
+                Core.tcc(rcName),
+                Core.tcc(rcLore)
+        ));
 
         //inv.setItem(36, mainPage);
 
@@ -234,8 +258,8 @@ public class TrollInventory4 implements Listener, InventoryHolder {
                     }
                     switch (e.getRawSlot()) {
                         case 10:
-                            CaveSounds troll = new CaveSounds();
-                            CaveSounds.GhastSound(VictimPlayer);
+                            Sounds troll = new Sounds();
+                            Sounds.GhastSound(VictimPlayer);
                             break;
                         case 11:
                             p.sendMessage("§b§lTFR §8| §7Are you sure you want to §c§lNUKE §7" + VictimPlayer.getName() + "?");
@@ -369,6 +393,11 @@ public class TrollInventory4 implements Listener, InventoryHolder {
                         case 32:
                             RingOfFire troll18 = new RingOfFire();
                             troll18.Nuke(VictimPlayer);
+                            break;
+                        case 33:
+                            RandomCrafts rc = new RandomCrafts();
+                            rc.craftTroll(VictimPlayer);
+                            break;
                         case 36:
                             TrollInventory3 sp = new TrollInventory3(VictimPlayer.getPlayer());
                             sp.openInventory(p);
@@ -387,9 +416,6 @@ public class TrollInventory4 implements Listener, InventoryHolder {
                             break;
                     }
                 } else if (e.isRightClick()){
-                    if (e.getRawSlot() < 36 && e.getRawSlot() != 0 && !needsConfirm.contains(e.getRawSlot())) {
-                        notifyUnTroller(p, clickedItem);
-                    }
                     switch (e.getRawSlot()) {
                         case 10:
                             stoptroll.stopSpecificTroll(VictimPlayer, "ghastsound", p);
@@ -427,6 +453,10 @@ public class TrollInventory4 implements Listener, InventoryHolder {
                             break;
                         case 32:
                             stoptroll.stopSpecificTroll(VictimPlayer, "ringoffire", p);
+                            break;
+                        case 33:
+                            stoptroll.stopSpecificTroll(VictimPlayer, "randomcraft", p);
+                            break;
                         case 36:
                             TrollInventory3 sp = new TrollInventory3(VictimPlayer.getPlayer());
                             sp.openInventory(p);

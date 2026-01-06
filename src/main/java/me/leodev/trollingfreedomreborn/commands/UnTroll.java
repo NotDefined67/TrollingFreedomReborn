@@ -1,6 +1,17 @@
 package me.leodev.trollingfreedomreborn.commands;
 
 import me.leodev.trollingfreedomreborn.main.Core;
+import me.leodev.trollingfreedomreborn.trolls.Beds.BedExplosion;
+import me.leodev.trollingfreedomreborn.trolls.Beds.BedNight;
+import me.leodev.trollingfreedomreborn.trolls.chat.*;
+import me.leodev.trollingfreedomreborn.trolls.classics.*;
+import me.leodev.trollingfreedomreborn.trolls.explosion.KittyCannon;
+import me.leodev.trollingfreedomreborn.trolls.explosion.TNTPlace;
+import me.leodev.trollingfreedomreborn.trolls.inventory.InventoryRave;
+import me.leodev.trollingfreedomreborn.trolls.inventory.InventoryStop;
+import me.leodev.trollingfreedomreborn.trolls.inventory.RandomInv;
+import me.leodev.trollingfreedomreborn.trolls.movement.*;
+import me.leodev.trollingfreedomreborn.trolls.random.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -28,7 +39,7 @@ public class UnTroll implements CommandExecutor, TabCompleter {
             "potato", "pumpkin", "rainitems",
             "randominv", "randomparticle",
             "rickroll", "silverfish", "slenderman",
-            "slipperyhands", "sneakdestroy",
+            "slipperyhands", "sneakdestroy","randomcraft",
             "spin", "starve", "skyflash", "ghastsound",
             "tntplace", "vomit","explodeonchat",
             "invert", "inventoryrave","stopsleep",
@@ -123,6 +134,10 @@ public class UnTroll implements CommandExecutor, TabCompleter {
         if (Potato.Break1.contains(t.getPlayer().getName())) {
             Potato a = new Potato();
             a.unpotato(t);
+        }
+        if (RandomCrafts.randomcraft.contains(t.getPlayer().getName())) {
+            RandomCrafts a = new RandomCrafts();
+            a.unCraftTroll(t);
         }
         if (Break.Break1.contains(t.getPlayer().getName())) {
             Break b = new Break();
@@ -308,6 +323,7 @@ public class UnTroll implements CommandExecutor, TabCompleter {
             case "coffindance": new Coffin().chk(new org.bukkit.entity.ArmorStand[0]); break;
             case "entitymultiply": new EntityMultiply().UnEntityMultiply(victim); break;
             case "deafen": Deafen.UnDeafen(victim); break;
+            case "randomcraft": new RandomCrafts().unCraftTroll(victim); break;
 
             // --- Page 2 ---
             case "forcejump": new ForceJump().UnJump(victim); break;
@@ -354,10 +370,11 @@ public class UnTroll implements CommandExecutor, TabCompleter {
                 senderFeedback(sndr, ChatColor.RED + "Troll '" + trollName + "' not recognized.");
                 break;
         }
-        senderFeedback(sndr, "§b§lTFR §8| §7Stopped §f" + trollName + " §7for §b" + victim.getName());
+        senderFeedback(sndr, "§b§lTFR §8| §7Successfully stopped troll §f" + trollName + " §7for §b" + victim.getName());
+
 
     }
-    private void senderFeedback(Player sndr, String message) {
+    private void senderFeedback(CommandSender sndr, String message) {
         if (sndr != null) {
             sndr.sendMessage(message);
         } else {

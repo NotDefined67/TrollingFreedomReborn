@@ -2,9 +2,22 @@ package me.leodev.trollingfreedomreborn.ui;
 
 import me.leodev.trollingfreedomreborn.commands.*;
 import me.leodev.trollingfreedomreborn.main.Core;
-import me.leodev.trollingfreedomreborn.other.ConfirmIH;
 import com.cryptomorin.xseries.XEnchantment;
 import com.cryptomorin.xseries.XMaterial;
+import me.leodev.trollingfreedomreborn.trolls.chat.NickWithoutEss;
+import me.leodev.trollingfreedomreborn.trolls.classics.Herobrine;
+import me.leodev.trollingfreedomreborn.trolls.classics.OP;
+import me.leodev.trollingfreedomreborn.trolls.explosion.ExplodingChicken;
+import me.leodev.trollingfreedomreborn.trolls.explosion.ExplosiveSheep;
+import me.leodev.trollingfreedomreborn.trolls.explosion.KittyCannon;
+import me.leodev.trollingfreedomreborn.trolls.fakestuff.FakeKicks;
+import me.leodev.trollingfreedomreborn.trolls.fakestuff.FakeReload;
+import me.leodev.trollingfreedomreborn.trolls.inventory.InventoryStop;
+import me.leodev.trollingfreedomreborn.trolls.inventory.Invsee;
+import me.leodev.trollingfreedomreborn.trolls.inventory.LockInventory;
+import me.leodev.trollingfreedomreborn.trolls.movement.*;
+import me.leodev.trollingfreedomreborn.trolls.random.HideAllPlayers;
+import me.leodev.trollingfreedomreborn.trolls.random.InstaToolBreak;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -130,7 +143,7 @@ public class TrollInventory2 implements Listener, InventoryHolder {
             herobrineMeta.setLore(herobrineLore);
 
             // 3. Set the specific Skin
-            herobrineMeta.setOwningPlayer(Bukkit.getOfflinePlayer("her0brine"));
+            herobrineMeta.setOwner("her0brine");
 
             // 4. Apply meta back to the item
             herobrineHead.setItemMeta(herobrineMeta);
@@ -272,8 +285,8 @@ public class TrollInventory2 implements Listener, InventoryHolder {
                             troll2.Sheep(VictimPlayer);
                             break;
                         case 12:
-                            FakeCrash troll3 = new FakeCrash();
-                            FakeCrash.FakeCrash(VictimPlayer);
+                            FakeKicks troll3 = new FakeKicks();
+                            FakeKicks.FakeCrash(VictimPlayer);
                             break;
                         case 13:
                             FakeReload troll4 = new FakeReload();
@@ -399,9 +412,6 @@ public class TrollInventory2 implements Listener, InventoryHolder {
                             break;
                     }
                 } else if (e.isRightClick()){
-                    if (e.getRawSlot() < 36 && e.getRawSlot() != 0 && !needsConfirm.contains(e.getRawSlot())) {
-                        notifyUnTroller(p, clickedItem);
-                    }
                     switch (e.getRawSlot()) {
                         case 14:
                             stoptroll.stopSpecificTroll(VictimPlayer, "forcejump", p);

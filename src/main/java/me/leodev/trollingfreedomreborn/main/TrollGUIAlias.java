@@ -1,6 +1,8 @@
 package me.leodev.trollingfreedomreborn.main;
 
 import me.leodev.trollingfreedomreborn.ui.PlayerSelectorInventory;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,24 +14,35 @@ public class TrollGUIAlias implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-        if (!sender.hasPermission("trollingfreedom.trollingfreedom.open")) {
+        if (!(sender instanceof Player)) {
+            sender.sendMessage("§cOnly players can use the GUI.");
+            return true;
+        }
 
-            String message2 = (String) Core.instance.getConfig().get("no-perms");
-            String replaced2 = message2.replace("&", "§").replace("%player%", sender.getName());
-            sender.sendMessage(replaced2);
-            return false;
+        Player p = (Player) sender;
+
+        if (!p.hasPermission("trollingfreedom.open")) {
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', (String) Core.instance.getConfig().get("no-perms")));
+            return true;
         }
+
+        // If they typed a name: /troll Technoblade
         if (args.length > 0) {
-            Player p = (Player) sender;
-            PlayerSelectorInventory ps = new PlayerSelectorInventory();
-            ps.openSel(p);
-            return false;
-        } else {
-            Player p = (Player) sender;
-            PlayerSelectorInventory ps = new PlayerSelectorInventory();
-            ps.openSel(p);
+            Player target = Bukkit.getPlayer(args[0]);
+            if (target != null) {
+                // THE CRITICAL CHECK
+                if (!Core.canTroll(target)) {
+                    p.sendMessage("§c§l[TFR] §7This player is §4protected §7and cannot be trolled.");
+                    return true;
+                }
+                // If not blocked, open the specific troll menu for that target
+                // (Assuming your UI has a way to open directly to a player's page)
+            }
         }
-        return false;
+
+        // Default: Open the player selector
+        new PlayerSelectorInventory().openSel(p);
+        return true;
     }
 
 }

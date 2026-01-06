@@ -2,9 +2,27 @@ package me.leodev.trollingfreedomreborn.main;
 
 import me.leodev.trollingfreedomreborn.commands.*;
 import me.leodev.trollingfreedomreborn.other.*;
-import me.leodev.trollingfreedomreborn.commands.Void;
 import com.cryptomorin.xseries.XEnchantment;
 import me.leodev.trollingfreedomreborn.other.EventListener;
+import me.leodev.trollingfreedomreborn.trolls.Beds.BedExplosion;
+import me.leodev.trollingfreedomreborn.trolls.Beds.BedMissing;
+import me.leodev.trollingfreedomreborn.trolls.Beds.BedNight;
+import me.leodev.trollingfreedomreborn.trolls.random.*;
+import me.leodev.trollingfreedomreborn.trolls.chat.ChatChange;
+import me.leodev.trollingfreedomreborn.trolls.chat.Deafen;
+import me.leodev.trollingfreedomreborn.trolls.chat.ExplodeOnChat;
+import me.leodev.trollingfreedomreborn.trolls.chat.ReverseMessage;
+import me.leodev.trollingfreedomreborn.trolls.classics.*;
+import me.leodev.trollingfreedomreborn.trolls.explosion.*;
+import me.leodev.trollingfreedomreborn.trolls.fakestuff.FakeKicks;
+import me.leodev.trollingfreedomreborn.trolls.fakestuff.FakeReload;
+import me.leodev.trollingfreedomreborn.trolls.inventory.*;
+import me.leodev.trollingfreedomreborn.trolls.movement.*;
+import me.leodev.trollingfreedomreborn.trolls.packettrolls.Credits;
+import me.leodev.trollingfreedomreborn.trolls.packettrolls.Demo;
+import me.leodev.trollingfreedomreborn.trolls.packettrolls.WorldLoading;
+import me.leodev.trollingfreedomreborn.trolls.random.Void;
+import me.leodev.trollingfreedomreborn.ui.ConfirmIH;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -17,7 +35,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.permissions.ServerOperator;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -90,8 +107,25 @@ public class Core extends JavaPlugin implements Listener {
         return skull;
     }
 
+    public static boolean canTroll(Player target) {
+        // 1. Check the allow-troll-op setting
+        boolean allowOp = Core.instance.getConfig().getBoolean("allow-troll-op", false);
+        if (target.isOp() && !allowOp) {
+            return false;
+        }
+
+        // 2. Check the blocklist
+        List<String> blocklist = Core.instance.getConfig().getStringList("blocklist");
+        if (blocklist.contains(target.getName())) {
+            return false;
+        }
+
+        return true;
+    }
+
     @Override
     public void onEnable() {
+        setupConfig();
 
         if (getConfig().getBoolean("values.dependency-downloader")) {
             try {
@@ -129,7 +163,7 @@ public class Core extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new Spin(), this);
         getServer().getPluginManager().registerEvents(new Launch(), this);
         getServer().getPluginManager().registerEvents(new Herobrine(), this);
-        getServer().getPluginManager().registerEvents(new FakeCrash(), this);
+        getServer().getPluginManager().registerEvents(new FakeKicks(), this);
         getServer().getPluginManager().registerEvents(new Break(), this);
         getServer().getPluginManager().registerEvents(new Potato(), this);
         getServer().getPluginManager().registerEvents(new Void(), this);
@@ -137,7 +171,7 @@ public class Core extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new Vomit(), this);
         getServer().getPluginManager().registerEvents(new WorldLoading(), this);
         getServer().getPluginManager().registerEvents(new Pumpkin(), this);
-        getServer().getPluginManager().registerEvents(new CaveSounds(), this);
+        getServer().getPluginManager().registerEvents(new Sounds(), this);
         getServer().getPluginManager().registerEvents(new AnvilDrop(), this);
         getServer().getPluginManager().registerEvents(new InventoryStop(), this);
         getServer().getPluginManager().registerEvents(new Slenderman(), this);
@@ -149,6 +183,7 @@ public class Core extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new ChatChange(), this);
         getServer().getPluginManager().registerEvents(new Invsee(), this);
         getServer().getPluginManager().registerEvents(new RandomTP(), this);
+        getServer().getPluginManager().registerEvents(new RandomCrafts(), this);
         getServer().getPluginManager().registerEvents(new Lightning(), this);
         getServer().getPluginManager().registerEvents(new HideAllPlayers(), this);
         getServer().getPluginManager().registerEvents(new TimeFlash(), this);
@@ -158,6 +193,7 @@ public class Core extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new LockInventory(), this);
         getServer().getPluginManager().registerEvents(new SneakDestroy(), this);
         getServer().getPluginManager().registerEvents(new InstaToolBreak(), this);
+        getServer().getPluginManager().registerEvents(new Burn(), this);
         getServer().getPluginManager().registerEvents(new EntityMultiply(), this);
         getServer().getPluginManager().registerEvents(new BedExplosion(), this);
         getServer().getPluginManager().registerEvents(new Lag(), this);
@@ -252,5 +288,28 @@ public class Core extends JavaPlugin implements Listener {
         this.getServer().getLogger().info("§b§lTrolling§3§lFreedomReborn §7| §cDisabling");
         this.getServer().getLogger().info("§c§lDisabled");
 
+    }
+    public void setupConfig() {
+        // 1. Load the existing config
+        FileConfiguration config = getConfig();
+
+        // 2. Define the defaults
+        List<String> defaultBlocklist = Arrays.asList("LeoMadrassiDev", "Herobrine");
+
+        // 3. Add defaults if they don't exist
+        config.addDefault("blocklist", defaultBlocklist);
+        config.addDefault("allow-troll-op", false);
+
+        // 4. Copy defaults so they are physically written to the file
+        config.options().copyDefaults(true);
+        saveConfig();
+
+        // 5. Add the Comments (Spigot/Paper 1.18.2+)
+        // This makes the config easy for admins to understand
+        config.setComments("blocklist", Collections.singletonList("Players in this list cannot be trolled"));
+        config.setComments("allow-troll-op", Collections.singletonList("If true, Operators can be trolled. If false, they are protected."));
+
+        // Save again to write the comments
+        saveConfig();
     }
 }
