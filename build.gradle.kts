@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "me.leodev"
-version = "3.0.0"
+version = "3.1.0"
 description = "A troll plugin with GUI - modified by leo"
 
 repositories {
