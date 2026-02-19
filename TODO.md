@@ -12,9 +12,14 @@
 - [X] Refactor file structure into a well-organized package system.
 - [ ] Optimize performance and listener efficiency.
 - [ ] Optimize non-one-time trolls for lag purposes
+- [ ] Rewrite Herobrine troll
+- [ ] add a troll all feature
+- [ ] refine trolling system
+- [ ] Add integration with worldguard and claim based plugins as an optional feature to disable troll in specific areas (and hopefully selective areas)
+- [ ] Re - add some stuff I stupidly remove (test) , chinese translation from original plugis
+- [ ] ensure plugin still works with CMI and other similar plugins and not just essentials, same for npc plugins
 - [ ] Fix the World Loading system properly.
 - [ ] Make it such that all trolls as defined in the withCMD class and called from inventory classes to enure message uniformity like untroll
-- [ ] Fix the Herobrine troll and make it clean.
 - [ ] block crafting troll, 
 - [X] Add blocklist to config.yml for safety
 - [X] Fix update checker using https://www.spigotmc.org/resources/⭐-trollingfreedomreborn-⭐-1-free-troll-plugin-with-gui.131388/
