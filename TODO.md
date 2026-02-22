@@ -15,6 +15,7 @@
 - [ ] Rewrite Herobrine troll
 - [ ] add a troll all feature
 - [ ] refine trolling system
+- [ ] Change command and add option for custom command alias
 - [ ] Add integration with worldguard and claim based plugins as an optional feature to disable troll in specific areas (and hopefully selective areas)
 - [ ] Re - add some stuff I stupidly remove (test) , chinese translation from original plugis
 - [ ] ensure plugin still works with CMI and other similar plugins and not just essentials, same for npc plugins
