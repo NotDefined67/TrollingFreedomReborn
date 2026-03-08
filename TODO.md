@@ -12,11 +12,10 @@
 ### ✅ To-Do List
 
 - [ ] Rename variables to be human-readable.
-- [X] Refactor file structure into a well-organized package system.
 - [ ] Optimize performance and listener efficiency.
 - [ ] Optimize non-one-time trolls for lag purposes
-- [ ] Rewrite Herobrine troll
 - [ ] add a troll all feature
+- [ ] Fix creeper aw man 
 - [ ] refine trolling system
 - [ ] Change command and add option for custom command alias
 - [ ] Add integration with worldguard and claim based plugins as an optional feature to disable troll in specific

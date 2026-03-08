@@ -54,10 +54,6 @@ public class CreeperAwMan implements Listener {
                 // handles IO exceptions
             }
         } else {
-            boolean wasFeedbackEnabled = p.getWorld().getGameRuleValue(GameRule.SEND_COMMAND_FEEDBACK);
-            if (wasFeedbackEnabled) {
-                Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "gamerule send_command_feedback false");
-            }
             Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "execute as @a at " + p2.getName() + " run function utils:play");
             Entity enderman = p.getWorld().spawnEntity(p.getLocation(), EntityType.CREEPER);
             LivingEntity livingenderman = (LivingEntity) enderman;
@@ -65,9 +61,7 @@ public class CreeperAwMan implements Listener {
             creatureenderman.setInvulnerable(false);
             creatureenderman.setTarget(p);
             p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new ComponentBuilder("Creeper Aw Man").color(AQUA).create());
-            if (wasFeedbackEnabled) {
-                Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "gamerule send_command_feedback true");
-            }
+
         }
     }
 
@@ -75,15 +69,10 @@ public class CreeperAwMan implements Listener {
     public void UnCreeper(Player p) {
         if (Creeper1.contains(p.getName())) {
             Creeper1.remove(p.getName());
-            boolean wasFeedbackEnabled = p.getWorld().getGameRuleValue(GameRule.SEND_COMMAND_FEEDBACK);
             Player p2 = p.getPlayer(); ///gamerule send_command_feedback
-            if (wasFeedbackEnabled) {
-                Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "gamerule send_command_feedback false");
-            }
+
             Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "execute as @a at " + p2.getName() + " run function utils:stop");
-            if (wasFeedbackEnabled) {
-                Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(), "gamerule send_command_feedback true");
-            }
+
         } else {
         }
     }
