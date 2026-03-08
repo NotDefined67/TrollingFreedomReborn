@@ -7,6 +7,15 @@ blocklist:
   - "Herobrine"
 # If true, Operators can be trolled. If false, they are protected.
 allow-troll-op: true
+#UNCOMMENT TO USE CUSTOM ALIASES FOR COMMANDS
+custom-aliases:
+  #TROLLING USING COMMAND
+  trollf:
+  #  - "troll123"
+  #  - "customtroll"
+  #TROLLING USING GUI
+  trollgui:
+  #  - "menu"
 # Chat massages
 cant-use-in-console: "&b&lTFR &8| &bYou cannot use this command in console"
 not-online: "&b&lTFR &8| &b%player% &3is not online"

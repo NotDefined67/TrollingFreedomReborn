@@ -7,26 +7,6 @@ import com.leomadrassi.trollingfreedomreborn.trolls.Beds.BedNight;
 import com.leomadrassi.trollingfreedomreborn.trolls.chat.*;
 import com.leomadrassi.trollingfreedomreborn.trolls.classics.*;
 import com.leomadrassi.trollingfreedomreborn.trolls.explosion.*;
-import com.leomadrassi.trollingfreedomreborn.trolls.inventory.*;
-import com.leomadrassi.trollingfreedomreborn.trolls.movement.*;
-import com.leomadrassi.trollingfreedomreborn.trolls.random.*;
-import com.leomadrassi.trollingfreedomreborn.trolls.chat.*;
-import com.leomadrassi.trollingfreedomreborn.trolls.classics.*;
-import com.leomadrassi.trollingfreedomreborn.trolls.explosion.*;
-import com.leomadrassi.trollingfreedomreborn.trolls.inventory.*;
-import com.leomadrassi.trollingfreedomreborn.trolls.movement.*;
-import com.leomadrassi.trollingfreedomreborn.trolls.random.*;
-import com.leomadrassi.trollingfreedomreborn.trolls.chat.*;
-import com.leomadrassi.trollingfreedomreborn.trolls.classics.*;
-import com.leomadrassi.trollingfreedomreborn.trolls.explosion.*;
-import com.leomadrassi.trollingfreedomreborn.trolls.inventory.*;
-import com.leomadrassi.trollingfreedomreborn.trolls.movement.*;
-import com.leomadrassi.trollingfreedomreborn.trolls.random.*;
-import com.leomadrassi.trollingfreedomreborn.trolls.random.Void;
-import com.leomadrassi.trollingfreedomreborn.trolls.random.*;
-import com.leomadrassi.trollingfreedomreborn.trolls.chat.*;
-import com.leomadrassi.trollingfreedomreborn.trolls.classics.*;
-import com.leomadrassi.trollingfreedomreborn.trolls.explosion.*;
 import com.leomadrassi.trollingfreedomreborn.trolls.fakestuff.FakeKicks;
 import com.leomadrassi.trollingfreedomreborn.trolls.fakestuff.FakeReload;
 import com.leomadrassi.trollingfreedomreborn.trolls.inventory.*;
@@ -35,6 +15,8 @@ import com.leomadrassi.trollingfreedomreborn.trolls.packettrolls.Credits;
 import com.leomadrassi.trollingfreedomreborn.trolls.packettrolls.Demo;
 import com.leomadrassi.trollingfreedomreborn.trolls.packettrolls.Guardian;
 import com.leomadrassi.trollingfreedomreborn.trolls.packettrolls.WorldLoading;
+import com.leomadrassi.trollingfreedomreborn.trolls.random.Void;
+import com.leomadrassi.trollingfreedomreborn.trolls.random.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -49,448 +31,297 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class TrollWithCMD
-        implements CommandExecutor,
-        TabCompleter {
+public class TrollWithCMD implements CommandExecutor, TabCompleter {
 
+    @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-        String ags;
 
+        // 1. SAFETY: Check if the user provided enough arguments BEFORE accessing the array
+        if (args.length < 2) {
+            String message1 = Core.instance.getConfig().getString("trollf-usage");
+            if (message1 == null) message1 = "&cUsage: /" + commandLabel + " <player> <troll>";
+            String replaced1 = message1.replace("&", "§").replace("%player%", sender.getName());
+            sender.sendMessage(replaced1);
+            return true;
+        }
+
+        // 2. PERMISSION CHECK
+        if (!sender.hasPermission("trollingfreedom.trollf")) {
+            String message2 = Core.instance.getConfig().getString("no-perms");
+            if (message2 == null) message2 = "&cNo permission!";
+            String replaced2 = message2.replace("&", "§").replace("%player%", sender.getName());
+            sender.sendMessage(replaced2);
+            return true;
+        }
+
+        // 3. TARGET PLAYER CHECK
         String pl = args[0];
         Player t = Bukkit.getPlayer(pl);
+
+        if (t == null) {
+            String message4 = Core.instance.getConfig().getString("not-online");
+            if (message4 == null) message4 = "&cPlayer %player% is not online.";
+            String replaced4 = message4.replace("&", "§").replace("%player%", args[0]);
+            sender.sendMessage(replaced4);
+            return true;
+        }
+
+        // 4. PROTECTION CHECK
         if (!Core.canTroll(t)) {
             sender.sendMessage("§c§l[TFR] §7This player is §4protected §7from being trolled.");
             return true;
         }
 
-        if (!sender.hasPermission("trollingfreedom.trollf")) {
+        // 5. EXECUTION LOGIC
+        String trollName = args[1].toLowerCase();
 
-            String message2 = (String) Core.instance.getConfig().get("no-perms");
-            String replaced2 = message2.replace("&", "§").replace("%player%", sender.getName());
-            sender.sendMessage(replaced2);
-            return false;
-        }
-        if (args.length == 0) {
-            String message1 = (String) Core.instance.getConfig().get("trollf-usage");
-            String replaced1 = message1.replace("&", "§").replace("%player%", sender.getName());
-            sender.sendMessage(replaced1);
-            return false;
-        }
-        if (args.length == 1) {
-
-            String message3 = (String) Core.instance.getConfig().get("trollf-usage");
-            String replaced3 = message3.replace("&", "§").replace("%player%", sender.getName());
-            sender.sendMessage(replaced3);
-            return false;
-        }
-        //
-        if (t == null) {
-            String message4 = (String) Core.instance.getConfig().get("not-online");
-            String replaced4 = message4.replace("&", "§").replace("%player%", args[0]);
-            sender.sendMessage(replaced4);
-            return false;
-        }
-        switch (ags = args.length > 1 ? args[1] : "") {
-            case "afk": {
-                AFK troll = new AFK();
+        switch (trollName) {
+            case "afk":
                 AFK.FakeAFK(t);
                 break;
-            }
-            case "unafk": {
-                AFK troll2 = new AFK();
+            case "unafk":
                 AFK.FakeUnAFK(t);
                 break;
-            }
-            case "entitydie": {
-                AllEntitiesDie troll3 = new AllEntitiesDie();
+            case "entitydie":
                 AllEntitiesDie.EntityDie(t);
                 break;
-            }
-            case "annoy": {
-                Annoy troll4 = new Annoy();
+            case "annoy":
                 Annoy.Annoy(t);
                 break;
-            }
-            case "anvildrop": {
-                AnvilDrop troll5 = new AnvilDrop();
+            case "anvildrop":
                 AnvilDrop.Anvil(t);
                 break;
-            }
-            case "aquaphobia": {
-                Aquaphobia troll6 = new Aquaphobia();
-                troll6.Aqua(t);
+            case "aquaphobia":
+                new Aquaphobia().Aqua(t);
                 break;
-            }
-            case "bedexplosion": {
-                BedExplosion troll7 = new BedExplosion();
-                troll7.BedExplosion(t);
+            case "bedexplosion":
+                new BedExplosion().BedExplosion(t);
                 break;
-            }
-            case "bedmissing": {
-                BedMissing troll8 = new BedMissing();
-                troll8.BedMissing(t);
+            case "bedmissing":
+                new BedMissing().BedMissing(t);
                 break;
-            }
-            case "stopblockbreakplace": {
-                Break troll9 = new Break();
-                troll9.Break(t);
+            case "stopblockbreakplace":
+                new Break().Break(t);
                 break;
-            }
-            case "cage": {
-                Cage troll10 = new Cage();
-                troll10.Cage(t);
+            case "cage":
+                new Cage().Cage(t);
                 break;
-            }
-            case "cavesounds": {
-                Sounds troll11 = new Sounds();
+            case "cavesounds":
                 Sounds.CaveSound(t);
                 break;
-            }
-            case "randomcraft": {
-                RandomCrafts rc = new RandomCrafts();
-                rc.craftTroll(t);
+            case "randomcraft":
+                new RandomCrafts().craftTroll(t);
                 break;
-            }
-            case "randomchat": {
-                ChatChange troll12 = new ChatChange();
-                troll12.ChatChange(t);
+            case "randomchat":
+                new ChatChange().ChatChange(t);
                 break;
-            }
-            case "coffindance": {
-                Coffin troll13 = new Coffin();
-                troll13.CoffinStart(t);
+            case "coffindance":
+                new Coffin().CoffinStart(t);
                 break;
-            }
-            case "credits": {
-                Credits troll14 = new Credits();
-                troll14.Credits(t);
+            case "credits":
+                new Credits().Credits(t);
                 break;
-            }
-            case "entitymultiply": {
-                EntityMultiply troll15 = new EntityMultiply();
-                troll15.EntityMultiply(t);
+            case "entitymultiply":
+                new EntityMultiply().EntityMultiply(t);
                 break;
-            }
-            case "creeperawman": {
-                CreeperAwMan troll16 = new CreeperAwMan();
+            case "creeperawman":
                 try {
                     CreeperAwMan.Creeper(t);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 break;
-            }
-            case "deafen": {
-                Deafen troll17 = new Deafen();
+            case "deafen":
                 Deafen.Deafen(t);
                 break;
-            }
-            case "demo": {
-                Demo troll18 = new Demo();
-                troll18.DemoMenu(t);
+            case "demo":
+                new Demo().DemoMenu(t);
                 break;
-            }
-            case "dropall": {
-                DropAll troll19 = new DropAll();
+            case "dropall":
                 DropAll.DropAll(t);
                 break;
-            }
-            case "explodingchicken": {
-                ExplodingChicken trollfg2 = new ExplodingChicken();
+            case "explodingchicken":
                 ExplodingChicken.Chicken(t);
                 break;
-            }
-            case "explosivesheep": {
-                ExplosiveSheep trollfg22 = new ExplosiveSheep();
-                trollfg22.Sheep(t);
+            case "explosivesheep":
+                new ExplosiveSheep().Sheep(t);
                 break;
-            }
-            case "fakecrash": {
-                FakeKicks trollfg23 = new FakeKicks();
+            case "fakecrash":
                 FakeKicks.FakeCrash(t);
                 break;
-            }
-            case "fakereload": {
-                FakeReload trollfg24 = new FakeReload();
-                trollfg24.Reload(t);
+            case "fakereload":
+                new FakeReload().Reload(t);
                 break;
-            }
-            case "forcejump": {
-                ForceJump trollfg25 = new ForceJump();
-                trollfg25.Jump(t);
+            case "forcejump":
+                new ForceJump().Jump(t);
                 break;
-            }
-            case "freeze": {
-                Freeze trollfg26 = new Freeze();
-                trollfg26.Freeze(t);
+            case "freeze":
+                new Freeze().Freeze(t);
                 break;
-            }
-            case "herobrine": {
-                Herobrine trollfg27 = new Herobrine();
+            case "herobrine":
                 Herobrine.Herobrine(t);
                 break;
-            }
-            case "hideallplayers": {
-                HideAllPlayers trollfg28 = new HideAllPlayers();
-                trollfg28.HideAll(t);
+            case "hideallplayers":
+                new HideAllPlayers().HideAll(t);
                 break;
-            }
-            case "instatoolbreak": {
-                InstaToolBreak trollfg29 = new InstaToolBreak();
-                trollfg29.InstaToolBreak(t);
+            case "instatoolbreak":
+                new InstaToolBreak().InstaToolBreak(t);
                 break;
-            }
-            case "inventorystop": {
-                InventoryStop trollfg210 = new InventoryStop();
-                trollfg210.InventoryStop(t);
+            case "inventorystop":
+                new InventoryStop().InventoryStop(t);
                 break;
-            }
-            case "invsee": {
-                Invsee trollfg211 = new Invsee();
+            case "invsee":
                 Invsee.Invsee(t);
                 break;
-            }
-            case "kittycannon": {
-                KittyCannon trollfg212 = new KittyCannon();
-                trollfg212.KittyCannon(t);
+            case "kittycannon":
+                new KittyCannon().KittyCannon(t);
                 break;
-            }
-            case "lag": {
-                Lag trollfg213 = new Lag();
+            case "lag":
                 Lag.Lagg(t);
                 break;
-            }
-            case "launch": {
-                Launch trollfg214 = new Launch();
+            case "launch":
                 Launch.Launch(t);
                 break;
-            }
-            case "lightning": {
-                Lightning trollfg215 = new Lightning();
-                trollfg215.Lightning(t);
+            case "lightning":
+                new Lightning().Lightning(t);
                 break;
-            }
-            case "lockinventory": {
-                LockInventory trollfg216 = new LockInventory();
+            case "lockinventory":
                 LockInventory.Lock(t);
                 break;
-            }
-            case "nick": {
-                NickWithoutEss trollfg217 = new NickWithoutEss();
-                trollfg217.NickName(t);
+            case "nick":
+                new NickWithoutEss().NickName(t);
                 break;
-            }
-            case "fakeop": {
-                OP trollfg218 = new OP();
+            case "fakeop":
                 OP.FakeOP(t);
                 break;
-            }
-            case "fakeunop": {
-                OP trollfg219 = new OP();
+            case "fakeunop":
                 OP.FakeDeOP(t);
                 break;
-            }
-            case "fakeclose": {
-                FakeKicks trollfg3 = new FakeKicks();
+            case "fakeclose":
                 FakeKicks.FakeClosed(t);
                 break;
-            }
-            case "fakeban": {
-                FakeKicks trollfg32 = new FakeKicks();
+            case "fakeban":
                 FakeKicks.FakeBan(t);
                 break;
-            }
-            case "burn": {
-                Burn trollfg33 = new Burn();
+            case "burn":
                 Burn.Burn(t);
                 break;
-            }
-            case "potato": {
-                Potato trollfg34 = new Potato();
-                trollfg34.potato(t);
+            case "potato":
+                new Potato().potato(t);
                 break;
-            }
-            case "pumpkin": {
-                Pumpkin trollfg35 = new Pumpkin();
-                trollfg35.Pumpkin(t);
+            case "pumpkin":
+                new Pumpkin().Pumpkin(t);
                 break;
-            }
-            case "rainitems": {
-                RainItems trollfg36 = new RainItems();
-                trollfg36.RainItem(t);
+            case "rainitems":
+                new RainItems().RainItem(t);
                 break;
-            }
-            case "randominv": {
-                RandomInv trollfg37 = new RandomInv();
-                trollfg37.RandomInv(t);
+            case "randominv":
+                new RandomInv().RandomInv(t);
                 break;
-            }
-            case "randomparticle": {
-                RandomParticle trollfg38 = new RandomParticle();
-                trollfg38.RandomParticle(t);
+            case "randomparticle":
+                new RandomParticle().RandomParticle(t);
                 break;
-            }
-            case "randomtp": {
-                RandomTP trollfg39 = new RandomTP();
+            case "randomtp":
                 RandomTP.RandomTP(t);
                 break;
-            }
-            case "rickroll": {
-                RickRoll trollfg310 = new RickRoll();
-                trollfg310.RickRoll(t);
+            case "rickroll":
+                new RickRoll().RickRoll(t);
                 break;
-            }
-            case "silverfish": {
-                Silverfish trollfg311 = new Silverfish();
+            case "silverfish":
                 Silverfish.Fish(t);
                 break;
-            }
-            case "slenderman": {
-                Slenderman trollfg312 = new Slenderman();
-                trollfg312.Enderman(t);
+            case "slenderman":
+                new Slenderman().Enderman(t);
                 break;
-            }
-            case "slipperyhands": {
-                SlipperyHands trollfg313 = new SlipperyHands();
+            case "slipperyhands":
                 SlipperyHands.SlipperyHands(t);
                 break;
-            }
-            case "sneakdestroy": {
-                SneakDestroy trollfg314 = new SneakDestroy();
-                trollfg314.SneakDestroy(t);
+            case "sneakdestroy":
+                new SneakDestroy().SneakDestroy(t);
                 break;
-            }
-            case "snowman": {
-                Snowman trollfg315 = new Snowman();
-                trollfg315.Snowman(t);
+            case "snowman":
+                new Snowman().Snowman(t);
                 break;
-            }
-            case "spin": {
-                Spin trollfg316 = new Spin();
+            case "spin":
                 Spin.Spin(t);
                 break;
-            }
-            case "starve": {
-                Starve trollfg317 = new Starve();
-                trollfg317.Starve(t);
+            case "starve":
+                new Starve().Starve(t);
                 break;
-            }
-            case "skyflash": {
-                TimeFlash trollfg318 = new TimeFlash();
-                trollfg318.SkyFlash(t);
+            case "skyflash":
+                new TimeFlash().SkyFlash(t);
                 break;
-            }
-            case "fakenuke": {
-                TNT trollfg319 = new TNT();
+            case "fakenuke":
                 TNT.FakeNuke(t);
                 break;
-            }
-            case "ghastsound": {
-                Sounds trollfg4 = new Sounds();
+            case "ghastsound":
                 Sounds.GhastSound(t);
                 break;
-            }
-            case "nuke": {
-                TNT trollfg42 = new TNT();
-                trollfg42.Nuke(t);
+            case "nuke":
+                new TNT().Nuke(t);
                 break;
-            }
-            case "tntplace": {
-                TNTPlace trollfg43 = new TNTPlace();
-                trollfg43.TNTPlace(t);
+            case "tntplace":
+                new TNTPlace().TNTPlace(t);
                 break;
-            }
-            case "void": {
-                Void trollfg44 = new Void();
+            case "void":
                 Void.Void(t);
                 break;
-            }
-            case "vomit": {
-                Vomit trollfg45 = new Vomit();
-                trollfg45.Vomit(t);
+            case "vomit":
+                new Vomit().Vomit(t);
                 break;
-            }
-            case "worldloading": {
-                WorldLoading trollfg46 = new WorldLoading();
-                trollfg46.WorldLoading(t);
+            case "worldloading":
+                new WorldLoading().WorldLoading(t);
                 break;
-            }
-            case "explodeonchat": {
-                ExplodeOnChat trollfg47 = new ExplodeOnChat();
+            case "explodeonchat":
                 ExplodeOnChat.Chat(t);
                 break;
-            }
-            case "invert": {
-                InvertWalk trollfg48 = new InvertWalk();
+            case "invert":
                 InvertWalk.Invert(t);
                 break;
-            }
-            case "inventoryrave": {
-                InventoryRave trollfg49 = new InventoryRave();
+            case "inventoryrave":
                 try {
-                    trollfg49.InvRave(t);
-                    break;
+                    new InventoryRave().InvRave(t);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }
-            case "bednight": {
-                BedNight trollfg50 = new BedNight();
-                trollfg50.BedNight(t);
                 break;
-            }
-            case "bedmonster": {
-                BedNight trollfg51 = new BedNight();
-                trollfg51.BedMonster(t);
+            case "bednight":
+                new BedNight().BedNight(t);
                 break;
-            }
-            case "stopsleep": {
-                BedNight trollfg52 = new BedNight();
-                trollfg52.StopSleep(t);
+            case "bedmonster":
+                new BedNight().BedMonster(t);
                 break;
-            }
-            case "freefall": {
-                FreeFall trollfg53 = new FreeFall();
+            case "stopsleep":
+                new BedNight().StopSleep(t);
+                break;
+            case "freefall":
                 FreeFall.FreeFall(t);
                 break;
-            }
-            case "reversemessage": {
-                ReverseMessage trollfg54 = new ReverseMessage();
-                trollfg54.Reverse(t);
+            case "reversemessage":
+                new ReverseMessage().Reverse(t);
                 break;
-            }
-            case "guardian": {
-                Guardian trollfg56 = new Guardian();
-                trollfg56.Guardian(t);
+            case "guardian":
+                new Guardian().Guardian(t);
                 break;
-            }
-            case "poop": {
-                Poop trollfg57 = new Poop();
-                trollfg57.Poop(t);
+            case "poop":
+                new Poop().Poop(t);
                 break;
-            }
-            case "control": {
-                String message2 = (String) Core.instance.getConfig().get("cannot-troll-yourself");
-                String replaced2 = message2.replace("&", "§");
+            case "control":
                 if (t.equals(sender)) {
-                    sender.sendMessage(replaced2);
-                } else {
-                    Player sendr = (Player) sender;
-                    sendr.performCommand("control " + t.getName());
+                    String msg = Core.instance.getConfig().getString("cannot-troll-yourself");
+                    sender.sendMessage(msg != null ? msg.replace("&", "§") : "§cYou cannot troll yourself!");
+                } else if (sender instanceof Player) {
+                    ((Player) sender).performCommand("control " + t.getName());
                 }
                 break;
-            }
-            case "ringoffire": {
-                RingOfFire trollfg59 = new RingOfFire();
-                trollfg59.Nuke(t);
-
+            case "ringoffire":
+                new RingOfFire().Nuke(t);
                 break;
-            }
             default:
-                // This runs if no case matches
                 senderFeedback(sender, ChatColor.RED + "Troll '" + args[1] + "' not recognized.");
-                return false;
+                return true;
         }
+
         senderFeedback(sender, "§b§lTFR §8| §7Successfully sent troll §f" + args[1] + " §7to §b" + t.getName());
         return true;
     }
@@ -499,100 +330,37 @@ public class TrollWithCMD
         if (sndr instanceof Player) {
             sndr.sendMessage(message);
         } else {
-            // Sends to console/rcon and strips colors
             Bukkit.getConsoleSender().sendMessage(ChatColor.stripColor(message));
         }
     }
 
+    @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
-        ArrayList<String> completions = new ArrayList<String>();
-        ArrayList<String> commands = new ArrayList<String>();
+        ArrayList<String> completions = new ArrayList<>();
+        ArrayList<String> commands = new ArrayList<>();
+
         if (args.length == 1) {
             for (Player p : Bukkit.getOnlinePlayers()) {
                 commands.add(p.getName());
             }
             StringUtil.copyPartialMatches(args[0], commands, completions);
         } else if (args.length == 2) {
-            if (!args[0].isEmpty()) {
-                commands.add("afk");
-                commands.add("unafk");
-                commands.add("entitydie");
-                commands.add("annoy");
-                commands.add("anvildrop");
-                commands.add("aquaphobia");
-                commands.add("bedexplosion");
-                commands.add("bedmissing");
-                commands.add("stopblockbreakplace");
-                commands.add("cage");
-                commands.add("cavesounds");
-                commands.add("randomchat");
-                commands.add("coffindance");
-                commands.add("credits");
-                commands.add("entitymultiply");
-                commands.add("creeperawman");
-                commands.add("deafen");
-                commands.add("demo");
-                commands.add("dropall");
-                commands.add("explodingchicken");
-                commands.add("explosivesheep");
-                commands.add("fakecrash");
-                commands.add("fakereload");
-                commands.add("forcejump");
-                commands.add("freeze");
-                commands.add("herobrine");
-                commands.add("hideallplayers");
-                commands.add("instatoolbreak");
-                commands.add("inventorystop");
-                commands.add("invsee");
-                commands.add("kittycannon");
-                commands.add("lag");
-                commands.add("launch");
-                commands.add("lightning");
-                commands.add("lockinventory");
-                commands.add("nick");
-                commands.add("fakeop");
-                commands.add("fakeunop");
-                commands.add("fakeclose");
-                commands.add("fakeban");
-                commands.add("burn");
-                commands.add("potato");
-                commands.add("pumpkin");
-                commands.add("rainitems");
-                commands.add("randominv");
-                commands.add("randomparticle");
-                commands.add("randomtp");
-                commands.add("rickroll");
-                commands.add("silverfish");
-                commands.add("slenderman");
-                commands.add("slipperyhands");
-                commands.add("sneakdestroy");
-                commands.add("snowman");
-                commands.add("spin");
-                commands.add("starve");
-                commands.add("skyflash");
-                commands.add("fakenuke");
-                commands.add("ghastsound");
-                commands.add("nuke");
-                commands.add("tntplace");
-                commands.add("void");
-                commands.add("vomit");
-                commands.add("worldloading");
-                commands.add("explodeonchat");
-                commands.add("invert");
-                commands.add("inventoryrave");
-                commands.add("bednight");
-                commands.add("bedmonster");
-                commands.add("stopsleep");
-                commands.add("freefall");
-                commands.add("reversemessage");
-                commands.add("guardian");
-                commands.add("poop");
-                commands.add("control");
-                commands.add("ringoffire");
-                commands.add("randomcraft");
-            }
+            String[] trolls = {
+                    "afk", "unafk", "entitydie", "annoy", "anvildrop", "aquaphobia", "bedexplosion", "bedmissing",
+                    "stopblockbreakplace", "cage", "cavesounds", "randomchat", "coffindance", "credits", "entitymultiply",
+                    "creeperawman", "deafen", "demo", "dropall", "explodingchicken", "explosivesheep", "fakecrash",
+                    "fakereload", "forcejump", "freeze", "herobrine", "hideallplayers", "instatoolbreak", "inventorystop",
+                    "invsee", "kittycannon", "lag", "launch", "lightning", "lockinventory", "nick", "fakeop", "fakeunop",
+                    "fakeclose", "fakeban", "burn", "potato", "pumpkin", "rainitems", "randominv", "randomparticle",
+                    "randomtp", "rickroll", "silverfish", "slenderman", "slipperyhands", "sneakdestroy", "snowman",
+                    "spin", "starve", "skyflash", "fakenuke", "ghastsound", "nuke", "tntplace", "void", "vomit",
+                    "worldloading", "explodeonchat", "invert", "inventoryrave", "bednight", "bedmonster", "stopsleep",
+                    "freefall", "reversemessage", "guardian", "poop", "control", "ringoffire", "randomcraft"
+            };
+            Collections.addAll(commands, trolls);
             StringUtil.copyPartialMatches(args[1], commands, completions);
         }
+
         Collections.sort(completions);
         return completions;
     }

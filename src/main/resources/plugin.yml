@@ -11,10 +11,10 @@ commands:
     aliases: [ tf ]
   trollgui:
     descrption: Troll GUI open
-    aliases: [ ltroll,tgui, trollingfreedomgui, tfgui, tfl ]
+    aliases: [ tgui, trollingfreedomgui, tfgui ]
   untroll:
     description: Untroll player
-    aliases: [ luntroll, stoptroll ]
+    aliases: [ untroll, stoptroll ]
   trollf:
     description: Troll with CMD
     aliases: [ trollcmd ]

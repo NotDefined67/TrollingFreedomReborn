@@ -163,6 +163,7 @@ public class Core extends JavaPlugin implements Listener {
         }
 
         getCommand("trollingfreedom").setExecutor(new Help());
+        getCommand("trollingfreedom").setTabCompleter(new Help());
         getCommand("untroll").setExecutor(new UnTroll());
         getCommand("untroll").setTabCompleter(new UnTroll());
 
@@ -243,7 +244,17 @@ public class Core extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new ConfirmIH(), this);
         getServer().getPluginManager().registerEvents(new Control(), this);
         getServer().getPluginManager().registerEvents(new RingOfFire(), this);
+        try {
+            Field f = Bukkit.getServer().getClass().getDeclaredField("commandMap");
+            f.setAccessible(true);
+            CommandMap commandMap = (CommandMap) f.get(Bukkit.getServer());
 
+            // 2. Register Custom Aliases from config
+            registerCustomAliases(commandMap);
+
+        } catch (Exception e) {
+            getLogger().severe("Failed to register custom aliases: " + e.getMessage());
+        }
         super.onEnable();
         reloadConfig();
         usingUUID = getConfig().getBoolean("values.using-uuid");
@@ -296,6 +307,39 @@ public class Core extends JavaPlugin implements Listener {
         UUID uuid = player.getUniqueId();
         individualTasks.computeIfAbsent(uuid, k -> new HashMap<>());
         individualTasks.get(uuid).computeIfAbsent(trollName, k -> new ArrayList<>()).add(taskId);
+    }
+
+    public void registerCustomAliases(CommandMap commandMap) {
+        FileConfiguration config = getConfig();
+
+        // Paths to your alias lists in config.yml
+        Map<String, String> aliasPaths = new HashMap<>();
+        aliasPaths.put("custom-aliases.trollf", "trollf");
+        aliasPaths.put("custom-aliases.trollgui", "trollgui");
+
+        for (Map.Entry<String, String> entry : aliasPaths.entrySet()) {
+            String configPath = entry.getKey();
+            String originalCmdName = entry.getValue();
+
+            List<String> aliases = config.getStringList(configPath);
+
+            if (aliases != null && !aliases.isEmpty()) {
+                // Get the original command to copy its executor and tab completer
+                org.bukkit.command.PluginCommand originalCmd = getCommand(originalCmdName);
+
+                if (originalCmd != null) {
+                    for (String alias : aliases) {
+                        // Create a dynamic command wrapper
+                        DynamicAlias dynamicAlias = new DynamicAlias(alias, originalCmd);
+
+                        // Register it with the server using your plugin's name as the fallback prefix
+                        commandMap.register(this.getDescription().getName(), dynamicAlias);
+
+                        getLogger().info("Registered custom alias: /" + alias + " -> /" + originalCmdName);
+                    }
+                }
+            }
+        }
     }
 
     public String getP() {
