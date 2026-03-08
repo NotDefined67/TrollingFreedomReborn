@@ -2,8 +2,8 @@ name: $name
 version: $version
 description: $description
 author: iAngry, LeoMadrassi
-main: me.leodev.trollingfreedomreborn.main.Core
-softdepend: [Essentials, Citizens, ProtocolLib]
+main: com.leomadrassi.trollingfreedomreborn.main.Core
+softdepend: [ Essentials, Citizens, ProtocolLib ]
 api-version: $apiVersion
 commands:
   trollingfreedom:
@@ -11,7 +11,7 @@ commands:
     aliases: [ tf ]
   trollgui:
     descrption: Troll GUI open
-    aliases: [ltroll,tgui, trollingfreedomgui, tfgui, tfl]
+    aliases: [ ltroll,tgui, trollingfreedomgui, tfgui, tfl ]
   untroll:
     description: Untroll player
     aliases: [ luntroll, stoptroll ]
@@ -23,6 +23,6 @@ commands:
     aliases: [ unlockinv ]
   panicstoptroll:
     description: stops all troll by this plugin for every player
-    aliases: [trollpanic, trollps, pstoptroll, tfrstop, tfstop]
+    aliases: [ trollpanic, trollps, pstoptroll, tfrstop, tfstop ]
   control:
     description: Lets you control player

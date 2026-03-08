@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.1.0] - 2026-01-06
 
 ### Added
+
 - Added blocklist
 - Added glint to enabled trolls
 - Added command to add and remove players to block list
@@ -49,6 +50,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Removed chinese translation from the original plugin
 - removed xseries files locally from project to implement it as a dependency in gradle
-
 
 [3.0.0]: https://github.com/NotDefined67/TrollingFreedomReborn/compare/v2.5.0-build-1...v3.0.0

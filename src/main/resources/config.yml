@@ -72,7 +72,7 @@ items:
   #^ Cage
   cavesounds-name: '&8Cave Sounds'
   cavesounds-lore: '&7Plays creepy cave sounds to your victim'
-    #^ Cave sounds
+  #^ Cave sounds
   chatchange-name: '&6Random Chat'
   chatchange-lore: '&7Changes your victims chat to random funny messages'
   #^ Chat change

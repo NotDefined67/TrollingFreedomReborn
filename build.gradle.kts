@@ -4,7 +4,7 @@ plugins {
     id("io.papermc.paperweight.userdev") version "2.0.0-beta.19"
 }
 
-group = "me.leodev"
+group = "com.leomadrassi"
 version = "3.1.0"
 description = "A troll plugin with GUI - modified by leo"
 
@@ -44,7 +44,7 @@ tasks {
 
     shadowJar {
         archiveFileName.set("TrollingFreedomReborn-${version}.jar")
-        relocate("com.cryptomorin.xseries", "me.leodev.trollingfreedomreborn.other")
+        relocate("com.cryptomorin.xseries", "com.leomadrassi.trollingfreedomreborn.other")
         minimize()
     }
     withType<JavaCompile> {
@@ -66,7 +66,7 @@ tasks {
     val copyJar = register<Copy>("copyJar") {
         from(shadowJar.get().archiveFile)
         // Adjust this path if the drive letter or folder structure differs
-        into("C:/Projects/MineCraftTestServer/1.21.11/plugins")
+        into("C:/Leo/Projects/MineCraftTestServer/1.21.11/plugins/")
     }
 
     build {
