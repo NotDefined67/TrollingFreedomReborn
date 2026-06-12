@@ -20,7 +20,7 @@ public class DependencyChecker implements Listener {
         File f = new File(path1 + "/plugins/" + "ProtocolLib.jar");
 
         if (Bukkit.getPluginManager().isPluginEnabled("ProtocolLib")) {
-            Bukkit.getLogger().info("§3TF§8: §7ProtocolLib dependency detected");
+            Bukkit.getLogger().info("§3TF§8: §7Found ProtocolLib, all good");
         } else {
             if (!Bukkit.getPluginManager().isPluginEnabled("ProtocolLib")) {
 
@@ -29,12 +29,12 @@ public class DependencyChecker implements Listener {
                     try (FileOutputStream fileOS = new FileOutputStream(path1 + "/plugins/" + "ProtocolLib.jar")) {
                         byte[] data = new byte[1024];
                         int byteContent;
-                        Bukkit.getLogger().info("§3TFR§8: §7ProtocolLib dependency has just been installed");
-                        Bukkit.getLogger().info("§3TFR§8: §7§lPLEASE RESTART YOUR SERVER TO ENABLE §b§lTROLLING§3§lFREEDOM");
+                        Bukkit.getLogger().info("§3TFR§8: §7ProtocolLib was missing so I downloaded it for you");
+                        Bukkit.getLogger().info("§3TFR§8: §7§lRestart your server to get TrollingFreedom working");
                         Bukkit.getLogger().info("");
                         Bukkit.getLogger().info("");
-                        Bukkit.getLogger().info("§3TFR§8: §7ProtocolLib dependency has just been installed");
-                        Bukkit.getLogger().info("§3TFR§8: §7§lPLEASE RESTART YOUR SERVER TO ENABLE §b§lTROLLING§3§lFREEDOM");
+                        Bukkit.getLogger().info("§3TFR§8: §7ProtocolLib was missing so I downloaded it for you");
+                        Bukkit.getLogger().info("§3TFR§8: §7§lRestart your server to get TrollingFreedom working");
                         while ((byteContent = inputStream.read(data, 0, 1024)) != -1) {
                             fileOS.write(data, 0, byteContent);
                         }

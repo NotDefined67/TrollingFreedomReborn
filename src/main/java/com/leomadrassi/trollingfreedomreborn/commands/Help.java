@@ -21,7 +21,7 @@ public class Help implements CommandExecutor, TabCompleter {
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
         if (args.length > 0 && args[0].equalsIgnoreCase("reload")) {
             if (!sender.hasPermission("trollingfreedom.reload")) {
-                sender.sendMessage(ChatColor.RED + "You do not have permission to reload TFR.");
+                sender.sendMessage(ChatColor.RED + "You dont have permission to reload the plugin.");
                 return true;
             }
 
@@ -33,12 +33,12 @@ public class Help implements CommandExecutor, TabCompleter {
                 org.bukkit.command.CommandMap commandMap = (org.bukkit.command.CommandMap) f.get(org.bukkit.Bukkit.getServer());
                 Core.instance.registerCustomAliases(commandMap);
             } catch (Exception e) {
-                sender.sendMessage(ChatColor.RED + "Config reloaded, but failed to refresh aliases.");
+                sender.sendMessage(ChatColor.RED + "Config reloaded but couldnt refresh aliases.");
                 e.printStackTrace();
                 return true;
             }
 
-            sender.sendMessage(ChatColor.AQUA + "Trolling Freedom Reborn " + ChatColor.GRAY + "| " + ChatColor.GREEN + "Configuration and Aliases reloaded!");
+            sender.sendMessage(ChatColor.AQUA + "TFR " + ChatColor.GRAY + "| " + ChatColor.GREEN + "Config and aliases reloaded.");
             return true;
         }
 
@@ -66,7 +66,7 @@ public class Help implements CommandExecutor, TabCompleter {
         List<String> messages = Core.instance.getConfig().getStringList("trollingfreedom-help");
 
         if (messages == null || messages.isEmpty()) {
-            s.sendMessage(ChatColor.RED + "Help menu not found in config.yml!");
+            s.sendMessage(ChatColor.RED + "Help menu not found in config.yml.");
             return;
         }
 

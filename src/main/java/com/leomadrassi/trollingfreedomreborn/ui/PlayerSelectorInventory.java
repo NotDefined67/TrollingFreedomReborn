@@ -119,7 +119,7 @@ public class PlayerSelectorInventory implements InventoryHolder, Listener {
                 if (!Core.canTroll(o)) {
                     lore.add(" ");
                     lore.add("§c§lPROTECTED");
-                    lore.add("§7You cannot troll this player.");
+                    lore.add("§7This player is blocked.");
                 } else {
                     lore.add(" ");
                     lore.add("§a§lVULNERABLE");
@@ -129,7 +129,7 @@ public class PlayerSelectorInventory implements InventoryHolder, Listener {
             } else {
                 if (!Core.canTroll(o)) {
                     lore.add("§c§lPROTECTED");
-                    lore.add("§7You cannot troll this player.");
+                    lore.add("§7This player is blocked.");
                 } else {
                     lore.add("§a§lVULNERABLE");
                     lore.add("§7Click to open troll menu.");
@@ -196,13 +196,13 @@ public class PlayerSelectorInventory implements InventoryHolder, Listener {
         }
         final Player Vic = Bukkit.getPlayerExact(clickedItem.getItemMeta().getDisplayName());
         if (!Core.canTroll(Vic)) {
-            p.sendMessage("§cYou cannot troll this player!");
+            p.sendMessage("§cThat player is blocked from trolling.");
             p.closeInventory();
             return;
         }
         if (Vic != null) {
             if (Vic instanceof Player) {
-                p.sendMessage("§b§lTFR §8| §7Selected §b" + Vic.getName() + " §7to troll.");
+                p.sendMessage("§b§lTFR §8| §7Picked §b" + Vic.getName() + " §7to troll.");
                 p.playSound(p.getLocation(), com.cryptomorin.xseries.XSound.BLOCK_NOTE_BLOCK_CHIME.parseSound(), 1f, 2f);
                 TrollInventory gt = new TrollInventory(Vic);
                 gt.openInventory(p);

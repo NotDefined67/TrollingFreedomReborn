@@ -85,7 +85,7 @@ public class EventListener implements Listener {
         if (Core.advCheck("trollingfreedom.troll", p)) {
             Item droppedi = e.getItemDrop();
             if (droppedi.getItemStack().isSimilar(Core.instance.getSkull())) {
-                p.sendMessage(Core.instance.getP() + "This item is undroppable.");
+                p.sendMessage(Core.instance.getP() + "You cant drop this item.");
                 e.setCancelled(true);
             }
         }

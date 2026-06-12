@@ -17,7 +17,7 @@ public class Panic implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!sender.hasPermission("trollingfreedom.panic")) {
-            sender.sendMessage(ChatColor.RED + "No permission.");
+            sender.sendMessage(ChatColor.RED + "You cant do that.");
             return true;
         }
 
@@ -26,8 +26,8 @@ public class Panic implements CommandExecutor {
         // FIRST RUN
         if (!confirmationPending.contains(uuid)) {
             confirmationPending.add(uuid);
-            sender.sendMessage("§4§l[WARNING] §cYou are about to stop ALL plugin tasks.");
-            sender.sendMessage("§crun the command again within 10 seconds to confirm.");
+            sender.sendMessage("§4§l[WARNING] §cThis will kill ALL plugin tasks and untroll everyone.");
+            sender.sendMessage("§cRun it again within 10 seconds to confirm.");
 
             // Remove from list after 5 seconds if they don't run it again
             Bukkit.getScheduler().runTaskLater(Core.instance, () -> confirmationPending.remove(uuid), 200L); // 100 ticks = 5 seconds
@@ -51,8 +51,8 @@ public class Panic implements CommandExecutor {
             }
         }
 
-        sender.sendMessage(ChatColor.DARK_RED + "§l[PANIC] §fAll tasks and trolls force-stopped.");
-        Bukkit.broadcast("§c§l[TFR] §7Panic switch activated by " + sender.getName(), "trollingfreedom.admin");
+        sender.sendMessage(ChatColor.DARK_RED + "§l[PANIC] §fEverything stopped.");
+        Bukkit.broadcast("§c§l[TFR] §7Panic switch pulled by " + sender.getName(), "trollingfreedom.admin");
 
         return true;
     }

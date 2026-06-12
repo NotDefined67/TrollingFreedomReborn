@@ -80,7 +80,7 @@ public class ConfirmIH implements InventoryHolder, Listener {
 
         ItemStack back = new ItemStack(Material.BARRIER);
         m = back.getItemMeta();
-        m.setDisplayName(ChatColor.YELLOW + "Turn Back / Cancel");
+        m.setDisplayName(ChatColor.YELLOW + "Go back");
         back.setItemMeta(m);
 
         inv.setItem(13, questionItem);

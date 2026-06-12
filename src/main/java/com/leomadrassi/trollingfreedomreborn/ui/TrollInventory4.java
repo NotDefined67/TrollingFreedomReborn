@@ -164,7 +164,7 @@ public class TrollInventory4 implements Listener, InventoryHolder {
         String trollName = clickedItem.getItemMeta().getDisplayName();
 
         // Send the message to the troller (the person who clicked)
-        troller.sendMessage("§b§lTFR §8| §7Successfully sent §b" + trollName + " §7to §f" + VictimPlayer.getName());
+        troller.sendMessage("§b§lTFR §8| §7Sent §b" + trollName + " §7to §f" + VictimPlayer.getName());
         troller.playSound(troller.getLocation(), com.cryptomorin.xseries.XSound.BLOCK_NOTE_BLOCK_CHIME.parseSound(), 1f, 2f);
     }
 
@@ -179,7 +179,7 @@ public class TrollInventory4 implements Listener, InventoryHolder {
         String trollName = clickedItem.getItemMeta().getDisplayName();
 
         // Send the message to the troller (the person who clicked)
-        untroller.sendMessage("§b§lTFR §8| §7Successfully §cstopped §b" + trollName + " §7for §f" + VictimPlayer.getName());
+        untroller.sendMessage("§b§lTFR §8| §7§cStopped §b" + trollName + " §7for §f" + VictimPlayer.getName());
         untroller.playSound(untroller.getLocation(), com.cryptomorin.xseries.XSound.BLOCK_NOTE_BLOCK_CHIME.parseSound(), 1f, 2f);
     }
 
@@ -249,8 +249,8 @@ public class TrollInventory4 implements Listener, InventoryHolder {
                             Sounds.GhastSound(VictimPlayer);
                             break;
                         case 11:
-                            p.sendMessage("§b§lTFR §8| §7Are you sure you want to §c§lNUKE §7" + VictimPlayer.getName() + "?");
-                            p.sendMessage("§b§lTFR §8| §7This troll will blow stuff up a lot!");
+                            p.sendMessage("§b§lTFR §8| §7Really §c§lNUKE §7" + VictimPlayer.getName() + "?");
+                            p.sendMessage("§b§lTFR §8| §7This will blow a lot of stuff up!");
 
                             new ConfirmIH(p, "§7Confirm §c§lNUKE §7on §l" + VictimPlayer.getName(), Material.TNT, true, new BiConsumer<Player, Boolean>() {
 
@@ -293,8 +293,8 @@ public class TrollInventory4 implements Listener, InventoryHolder {
                             troll5.Vomit(VictimPlayer);
                             break;
                         case 15:
-                            p.sendMessage("§b§lTFR §8| §7Are you sure you want to start §7world loading §7" + VictimPlayer.getName() + "?");
-                            p.sendMessage("§b§lTFR §8| §7They may not be able to exit out of this until they leave the game");
+                            p.sendMessage("§b§lTFR §8| §7Really start §7world loading §7on " + VictimPlayer.getName() + "?");
+                            p.sendMessage("§b§lTFR §8| §7They might not be able to escape without leaving the game");
 
                             new ConfirmIH(p, "§7Confirm §7world loading §7on §l" + VictimPlayer.getName(), Material.DIRT, true, new BiConsumer<Player, Boolean>() {
 

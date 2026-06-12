@@ -190,7 +190,7 @@ public class TrollInventory implements Listener, InventoryHolder {
         String trollName = clickedItem.getItemMeta().getDisplayName();
 
         // Send the message to the troller (the person who clicked)
-        troller.sendMessage("§b§lTFR §8| §7Successfully sent §b" + trollName + " §7to §f" + VictimPlayer.getName());
+        troller.sendMessage("§b§lTFR §8| §7Sent §b" + trollName + " §7to §f" + VictimPlayer.getName());
         troller.playSound(troller.getLocation(), com.cryptomorin.xseries.XSound.BLOCK_NOTE_BLOCK_CHIME.parseSound(), 1f, 2f);
     }
 
@@ -205,7 +205,7 @@ public class TrollInventory implements Listener, InventoryHolder {
         String trollName = clickedItem.getItemMeta().getDisplayName();
 
         // Send the message to the troller (the person who clicked)
-        untroller.sendMessage("§b§lTFR §8| §7Successfully §cstopped §b" + trollName + " §7for §f" + VictimPlayer.getName());
+        untroller.sendMessage("§b§lTFR §8| §7§cStopped §b" + trollName + " §7for §f" + VictimPlayer.getName());
         untroller.playSound(untroller.getLocation(), com.cryptomorin.xseries.XSound.BLOCK_NOTE_BLOCK_CHIME.parseSound(), 1f, 2f);
     }
 
@@ -303,9 +303,8 @@ public class TrollInventory implements Listener, InventoryHolder {
                                 Demo troll18 = new Demo();
                                 troll18.DemoMenu(VictimPlayer);
                             } else {
-                                p.sendMessage("§3TFR§8: §7If this troll did not work");
-                                p.sendMessage("§3TFR§8: §7then please make sure you are on the ");
-                                p.sendMessage("§3TFR§8: §7latest version of Minecraft");
+                                p.sendMessage("§3TFR§8: §7If this troll does nothing");
+                                p.sendMessage("§3TFR§8: §7make sure youre on the latest Minecraft version");
                                 Demo troll18 = new Demo();
                                 troll18.DemoMenu(VictimPlayer);
                             }

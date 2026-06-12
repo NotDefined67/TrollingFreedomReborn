@@ -113,7 +113,7 @@ public class TrollCommand extends CommandHandler {
 
                         // Save to file and refresh memory
                         Core.instance.saveConfig();
-                        sender.sendMessage(Core.instance.getP() + "§7Allow-Troll-OP is now: " + (!currentVal ? "§aEnabled" : "§cDisabled"));
+                        sender.sendMessage(Core.instance.getP() + "§7Trolling OPs is now " + (!currentVal ? "§aallowed" : "§cblocked"));
                         break;
 
                     case "add-blocked":
@@ -193,7 +193,7 @@ public class TrollCommand extends CommandHandler {
 //            }
 
         } else {
-            sender.sendMessage("no player");
+            sender.sendMessage("§cOnly players can run this command.");
         }
 
         return true;

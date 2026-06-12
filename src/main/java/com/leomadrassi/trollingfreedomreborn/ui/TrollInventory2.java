@@ -224,7 +224,7 @@ public class TrollInventory2 implements Listener, InventoryHolder {
         String trollName = clickedItem.getItemMeta().getDisplayName();
 
         // Send the message to the troller (the person who clicked)
-        troller.sendMessage("§b§lTFR §8| §7Successfully sent §b" + trollName + " §7to §f" + VictimPlayer.getName());
+        troller.sendMessage("§b§lTFR §8| §7Sent §b" + trollName + " §7to §f" + VictimPlayer.getName());
         troller.playSound(troller.getLocation(), com.cryptomorin.xseries.XSound.BLOCK_NOTE_BLOCK_CHIME.parseSound(), 1f, 2f);
 
     }
@@ -240,7 +240,7 @@ public class TrollInventory2 implements Listener, InventoryHolder {
         String trollName = clickedItem.getItemMeta().getDisplayName();
 
         // Send the message to the troller (the person who clicked)
-        untroller.sendMessage("§b§lTFR §8| §7Successfully §cstopped §b" + trollName + " §7for §f" + VictimPlayer.getName());
+        untroller.sendMessage("§b§lTFR §8| §7§cStopped §b" + trollName + " §7for §f" + VictimPlayer.getName());
         untroller.playSound(untroller.getLocation(), com.cryptomorin.xseries.XSound.BLOCK_NOTE_BLOCK_CHIME.parseSound(), 1f, 2f);
     }
 
@@ -296,12 +296,12 @@ public class TrollInventory2 implements Listener, InventoryHolder {
                                 Herobrine troll7 = new Herobrine();
                                 Herobrine.Herobrine(VictimPlayer);
                             } else {
-                                p.sendMessage("§3TFR§8: §7Please install Citizens for this troll to work");
+                                p.sendMessage("§3TFR§8: §7You need Citizens installed for this to work");
                                 p.sendMessage("§3TFR§8: §7§nhttps://ci.citizensnpcs.co/job/citizens2/");
                             }
                             break;
                         case 19:
-                            p.sendMessage("§b§lTFR §8| §7Are you sure you want to §3§lhide all players §7from " + VictimPlayer.getName() + "?");
+                            p.sendMessage("§b§lTFR §8| §7Really §3§lhide all players §7from " + VictimPlayer.getName() + "?");
 
                             new ConfirmIH(p, "§7Confirm §3§lHide All Players §7On §l" + VictimPlayer.getName(), Material.TNT, true, new BiConsumer<Player, Boolean>() {
 
@@ -368,7 +368,7 @@ public class TrollInventory2 implements Listener, InventoryHolder {
                                 NickWithoutEss troll17 = new NickWithoutEss();
                                 troll17.NickName(VictimPlayer);
                             } else {
-                                p.sendMessage("§3TFR§8: §7Please install Essentials for this troll to work");
+                                p.sendMessage("§3TFR§8: §7You need Essentials installed for this to work");
                                 p.sendMessage("§3TFR§8: §7§nhttps://www.spigotmc.org/resources/essentialsx.9089/");
                             }
 

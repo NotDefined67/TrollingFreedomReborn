@@ -68,7 +68,7 @@ public class TrollWithCMD implements CommandExecutor, TabCompleter {
 
         // 4. PROTECTION CHECK
         if (!Core.canTroll(t)) {
-            sender.sendMessage("§c§l[TFR] §7This player is §4protected §7from being trolled.");
+            sender.sendMessage("§c§l[TFR] §7That player is §4blocked §7from being trolled.");
             return true;
         }
 
@@ -318,11 +318,11 @@ public class TrollWithCMD implements CommandExecutor, TabCompleter {
                 new RingOfFire().Nuke(t);
                 break;
             default:
-                senderFeedback(sender, ChatColor.RED + "Troll '" + args[1] + "' not recognized.");
+                senderFeedback(sender, ChatColor.RED + "I dont know a troll called '" + args[1] + "'.");
                 return true;
         }
 
-        senderFeedback(sender, "§b§lTFR §8| §7Successfully sent troll §f" + args[1] + " §7to §b" + t.getName());
+        senderFeedback(sender, "§b§lTFR §8| §7Sent §f" + args[1] + " §7to §b" + t.getName());
         return true;
     }
 

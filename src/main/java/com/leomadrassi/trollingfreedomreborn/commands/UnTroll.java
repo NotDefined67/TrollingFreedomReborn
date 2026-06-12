@@ -106,7 +106,7 @@ public class UnTroll implements CommandExecutor, TabCompleter {
                     e.printStackTrace();
                 }
             }
-            sender.sendMessage("§b§lTFR §8| §7Stopped all trolls for §fEVERYONE");
+            sender.sendMessage("§b§lTFR §8| §7Untrolled §fEVERYONE");
             return true;
         }
 
@@ -475,10 +475,10 @@ public class UnTroll implements CommandExecutor, TabCompleter {
                 break;
 
             default:
-                senderFeedback(sndr, ChatColor.RED + "Troll '" + trollName + "' not recognized.");
+                senderFeedback(sndr, ChatColor.RED + "I don't know a troll called '" + trollName + "'.");
                 break;
         }
-        senderFeedback(sndr, "§b§lTFR §8| §7Successfully stopped troll §f" + trollName + " §7for §b" + victim.getName());
+        senderFeedback(sndr, "§b§lTFR §8| §7Stopped §f" + trollName + " §7for §b" + victim.getName());
 
 
     }

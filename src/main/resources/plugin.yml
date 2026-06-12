@@ -10,19 +10,19 @@ commands:
     description: Plugin help
     aliases: [ tf ]
   trollgui:
-    descrption: Troll GUI open
+    description: Open the troll GUI
     aliases: [ tgui, trollingfreedomgui, tfgui ]
   untroll:
-    description: Untroll player
+    description: Remove trolls from a player
     aliases: [ untroll, stoptroll ]
   trollf:
-    description: Troll with CMD
+    description: Troll someone from command line
     aliases: [ trollcmd ]
   unchesttroll:
-    description: Stops lock inventory for sender
+    description: Unlock your own inventory
     aliases: [ unlockinv ]
   panicstoptroll:
-    description: stops all troll by this plugin for every player
+    description: Emergency stop — kills all plugin tasks
     aliases: [ trollpanic, trollps, pstoptroll, tfrstop, tfstop ]
   control:
-    description: Lets you control player
+    description: Take control of a player

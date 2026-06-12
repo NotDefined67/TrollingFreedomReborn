@@ -253,7 +253,7 @@ public class Core extends JavaPlugin implements Listener {
             registerCustomAliases(commandMap);
 
         } catch (Exception e) {
-            getLogger().severe("Failed to register custom aliases: " + e.getMessage());
+            getLogger().severe("Could not register custom aliases: " + e.getMessage());
         }
         super.onEnable();
         reloadConfig();
@@ -282,17 +282,17 @@ public class Core extends JavaPlugin implements Listener {
                 getServer().getConsoleSender().sendMessage(replaced1);
             } else {
                 getServer().getConsoleSender().sendMessage(ChatColor.RED + "=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                getServer().getConsoleSender().sendMessage(ChatColor.RED + "There is an update to Trolling Freedom Reborn!");
-                getServer().getConsoleSender().sendMessage(ChatColor.RED + "Please check spigot page, modrinth page or github for updates for §bTrolling§3§lFreedomReborn");
-                getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "Github: §nhttps://github.com/NotDefined67/TrollingFreedomReborn");
+                getServer().getConsoleSender().sendMessage(ChatColor.RED + "TrollingFreedomReborn has an update available!");
+                getServer().getConsoleSender().sendMessage(ChatColor.RED + "Grab it from one of these links:");
+                getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "GitHub: §nhttps://github.com/NotDefined67/TrollingFreedomReborn");
                 getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "Spigot: §nhttps://www.spigotmc.org/resources/.131388/");
                 getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "Modrinth: §nhttps://modrinth.com/plugin/trollingfreedomreborn");
                 getServer().getConsoleSender().sendMessage(ChatColor.RED + "=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
                 Bukkit.getOnlinePlayers().stream().filter(ServerOperator::isOp).forEach(op -> {
                     op.sendMessage(ChatColor.RED + "=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
-                    op.sendMessage(ChatColor.RED + "There is an update to Trolling Freedom Reborn!");
-                    op.sendMessage(ChatColor.RED + "Please check spigot page, modrinth page or github for updates for §bTrolling§3§lFreedomReborn");
-                    op.sendMessage(ChatColor.LIGHT_PURPLE + "Github: §nhttps://github.com/NotDefined67/TrollingFreedomReborn");
+                    op.sendMessage(ChatColor.RED + "TrollingFreedomReborn has an update available!");
+                    op.sendMessage(ChatColor.RED + "Grab it from one of these links:");
+                    op.sendMessage(ChatColor.LIGHT_PURPLE + "GitHub: §nhttps://github.com/NotDefined67/TrollingFreedomReborn");
                     op.sendMessage(ChatColor.LIGHT_PURPLE + "Spigot: §nhttps://www.spigotmc.org/resources/.131388/");
                     op.sendMessage(ChatColor.LIGHT_PURPLE + "Modrinth: §nhttps://modrinth.com/plugin/trollingfreedomreborn");
                     op.sendMessage(ChatColor.RED + "=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
@@ -335,7 +335,7 @@ public class Core extends JavaPlugin implements Listener {
                         // Register it with the server using your plugin's name as the fallback prefix
                         commandMap.register(this.getDescription().getName(), dynamicAlias);
 
-                        getLogger().info("Registered custom alias: /" + alias + " -> /" + originalCmdName);
+                        getLogger().info("Added alias /" + alias + " targeting /" + originalCmdName);
                     }
                 }
             }
@@ -353,8 +353,8 @@ public class Core extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
 
-        this.getServer().getLogger().info("§b§lTrolling§3§lFreedomReborn §7| §cDisabling");
-        this.getServer().getLogger().info("§c§lDisabled");
+        this.getServer().getLogger().info("§b§lTrolling§3§lFreedomReborn §7| §cShutting down");
+        this.getServer().getLogger().info("§c§lDone");
 
     }
 
@@ -375,8 +375,8 @@ public class Core extends JavaPlugin implements Listener {
 
         // 5. Add the Comments (Spigot/Paper 1.18.2+)
         // This makes the config easy for admins to understand
-        config.setComments("blocklist", Collections.singletonList("Players in this list cannot be trolled"));
-        config.setComments("allow-troll-op", Collections.singletonList("If true, Operators can be trolled. If false, they are protected."));
+        config.setComments("blocklist", Collections.singletonList("Players listed here are immune to trolling"));
+        config.setComments("allow-troll-op", Collections.singletonList("Set to true if you want to allow trolling operators"));
 
         // Save again to write the comments
         saveConfig();

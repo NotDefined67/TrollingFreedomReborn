@@ -191,7 +191,7 @@ public class TrollInventory3 implements Listener, InventoryHolder {
         String trollName = clickedItem.getItemMeta().getDisplayName();
 
         // Send the message to the troller (the person who clicked)
-        troller.sendMessage("§b§lTFR §8| §7Successfully sent §b" + trollName + " §7to §f" + VictimPlayer.getName());
+        troller.sendMessage("§b§lTFR §8| §7Sent §b" + trollName + " §7to §f" + VictimPlayer.getName());
         troller.playSound(troller.getLocation(), com.cryptomorin.xseries.XSound.BLOCK_NOTE_BLOCK_CHIME.parseSound(), 1f, 2f);
     }
 
@@ -206,7 +206,7 @@ public class TrollInventory3 implements Listener, InventoryHolder {
         String trollName = clickedItem.getItemMeta().getDisplayName();
 
         // Send the message to the troller (the person who clicked)
-        untroller.sendMessage("§b§lTFR §8| §7Successfully §cstopped §b" + trollName + " §7for §f" + VictimPlayer.getName());
+        untroller.sendMessage("§b§lTFR §8| §7§cStopped §b" + trollName + " §7for §f" + VictimPlayer.getName());
         untroller.playSound(untroller.getLocation(), com.cryptomorin.xseries.XSound.BLOCK_NOTE_BLOCK_CHIME.parseSound(), 1f, 2f);
     }
 

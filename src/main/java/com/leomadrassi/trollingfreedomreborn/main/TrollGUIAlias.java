@@ -15,7 +15,7 @@ public class TrollGUIAlias implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("§cOnly players can use the GUI.");
+            sender.sendMessage("§cOnly players can open the GUI.");
             return true;
         }
 
@@ -32,7 +32,7 @@ public class TrollGUIAlias implements CommandExecutor {
             if (target != null) {
                 // THE CRITICAL CHECK
                 if (!Core.canTroll(target)) {
-                    p.sendMessage("§c§l[TFR] §7This player is §4protected §7and cannot be trolled.");
+                    p.sendMessage("§c§l[TFR] §7That player is §4blocked §7from trolling.");
                     return true;
                 }
                 // If not blocked, open the specific troll menu for that target
