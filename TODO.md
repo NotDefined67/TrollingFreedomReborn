@@ -38,4 +38,4 @@
 - [ ] Make all trolls use the same message formatting
 - [ ] Swap the deprecated Bukkit scheduler for Paper's Folia-friendly one
 - [ ] Drop `commons-lang:2.6`, its ancient and I barely use it
-- [ ] Clean up the AI-generated garbage (inconsistent naming, dead fields)
+- [ ] Clean up inconsistent naming and dead fields
