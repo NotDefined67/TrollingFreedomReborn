@@ -25,10 +25,10 @@ TrollingFreedom project.
 
 ### 📦 Dependencies
 
-* **ProtocolLib** (Required)
-* **EssentialsX** (Useful)
-* **SkinRestorer** (Optional, gives better experience on cracked servers)
-* **Citizens2** (Required only for the Herobrine troll)
+* **ProtocolLib** (Required — auto-downloaded if missing)
+* **EssentialsX** (Optional — enables nickname troll)
+* **Citizens2** (Optional — required only for the Herobrine troll)
+* **SkinRestorer** (Optional — better experience on cracked servers)
 
 ### 🖱️ The Troll Menu
 
@@ -59,15 +59,42 @@ Open the main interface with `/trollgui` to access over 70 unique actions:
 
 ## 💻 Commands & Permissions
 
-| Command                    | Description                                           | Permission                |
-|:---------------------------|:------------------------------------------------------|:--------------------------|
-| `/troll`                   | Opens the main Troll GUI                              | `trollingfreedom.open`    |
-| `/trollf <player> <troll>` | Execute a troll via command                           | `trollingfreedom.trollf`  |
-| `/untroll <player>`        | Instantly remove all active trolls                    | `trollingfreedom.untroll` |
-| `/troll reload`            | Reload the plugin configuration                       | `trollingfreedom.reload`  |
-| `/panicstoptroll`          | Resets all plugin tasks in case of something breaking | `trollingfreedom.panic`   |
+| Command                               | Description                                              | Permission                    |
+|:--------------------------------------|:---------------------------------------------------------|:------------------------------|
+| `/troll`                              | Opens the main Troll GUI                                 | `trollingfreedom.open`        |
+| `/trollgui`                           | Alias for `/troll`                                       | `trollingfreedom.open`        |
+| `/trollf <player> <troll>`            | Execute a troll via command                              | `trollingfreedom.trollf`      |
+| `/untroll <player> [troll]`           | Remove all (or specific) active trolls                   | `trollingfreedom.untroll`     |
+| `/untroll all`                        | Remove ALL trolls from ALL players                       | `trollingfreedom.untroll`     |
+| `/panicstoptroll`                     | Nuclear reset — cancels all plugin tasks                 | `trollingfreedom.panic`       |
+| `/trollingfreedom`                    | Show help page                                           | —                             |
+| `/trollingfreedom reload`             | Reload plugin configuration                              | `trollingfreedom.reload`      |
+| `/troll reload`                       | Open settings menu (reload config)                       | `trollingfreedom.reload`      |
+| `/troll add-blocked <player>`         | Add player to blocklist                                   | `trollingfreedom.open`        |
+| `/troll remove-blocked <player>`      | Remove player from blocklist                              | `trollingfreedom.open`        |
+| `/troll toggle-troll-op`              | Toggle whether OPs can be trolled                        | `trollingfreedom.open`        |
+| `/troll giveskull`                    | Get the TrollingFreedom skull item                       | `trollingfreedom.open`        |
+| `/troll help` / `/troll contact`      | Show help / contact info                                 | `trollingfreedom.open`        |
+| `/control <player>`                   | Take control of a player's movement/chat                 | `trollingfreedom.trollf`      |
 
 **Master Permission:** `trollingfreedom.*`
+
+---
+
+## Config
+
+Everything is in `src/main/resources/config.yml`. Open it and look — the comments explain most things.
+
+Main things you'd want to change:
+
+- **Blocklist** — Add or remove player names under `blocklist:`. Anyone in this list cant be trolled.
+- **allow-troll-op: true/false** — Set to `false` if you dont want ops to be trolled.
+- **untroll-on-quit: true/false** — Auto untroll players when they leave.
+- **custom-aliases** — Uncomment to add extra command aliases for `/trollf` and `/trollgui`.
+- **troll-config.randomchat** — The random messages the chat troll pulls from. Swap em with your own.
+- **Items** — Every trolls name and lore in the GUI is configurable under `items:`.
+
+Everything else in there is chat messages and GUI strings. Tweak whatever you want.
 
 ---
 
@@ -79,8 +106,8 @@ modern Minecraft versions.
 * **Current Developer:** [Leo Madrassi](https://github.com/leomadrassidev)
 * **Forked From:** [Lumine1909's TrollingFreedom_Continue](https://github.com/Lumine1909/TrollingFreedom_Continue)
 * **Original Author:** [iAngry0 (Original TrollingFreedom)](https://github.com/iangry0/TrollingFreedom)
-* **AI Assistance:** Credits to **Gemini Flash** for logic generation and refactoring.
-* **Translations:** Special thanks to **Cha_Shao** for the original Chinese translation.
+* **AI Assistance:** Credits to **Gemini Flash** for logic generation and refactoring
+* **Translations:** Special thanks to **Cha_Shao** for the original Chinese translation
 
 ---
 
@@ -121,3 +148,19 @@ given below.
 > [!NOTE]
 > Feel free to open an issue or ping me on Discord if I missed an update or you have a suggestion. If you report a bug
 > or suggest a feature that gets implemented, you will be credited in the next commit!
+
+## 🔧 Full Troll Reference
+
+The plugin includes **82+ trolls** across 9 categories:
+
+| Category     | Trolls                                                                                       |
+|:-------------|:---------------------------------------------------------------------------------------------|
+| Classic      | Herobrine, OP Trick, Pumpkin, RickRoll, Slenderman, Spin, Creeper Aw Man, Anvil Drop, Coffin |
+| Chat         | Random Chat, Deafen, Explode On Chat, Nick, Reverse Message                                  |
+| Movement     | AFK, Cage, Control, Force Jump, Free Fall, Freeze, Invert Walk, Lag, Launch, Lightning, Sneak Destroy |
+| Explosion    | Exploding Chicken, Explosive Sheep, Kitty Cannon, Snowman, Nuke, TNT Place                   |
+| Inventory    | Drop All, Inventory Rave, Inventory Stop, Invsee, Lock Inventory, Random Inventory           |
+| Beds         | Bed Explosion, Bed Missing, Bed Night, Stop Sleep                                            |
+| Packet       | Credits, Demo, Guardian, World Loading                                                       |
+| Fake Stuff   | Fake Kicks (Crash/Close/Ban), Fake Reload                                                    |
+| Random       | Annoy, Aquaphobia, Break, Burn, Entity Multiply, Hide Players, InstaTool Break, Poop, Potato, Rain Items, Random Crafts, Random Particle, Random TP, Ring of Fire, Silverfish, Slippery Hands, Sounds, Starve, Time Flash, Void, Vomit, All Entities Die |
