@@ -90,7 +90,6 @@ Everything else is just chat strings and GUI labels. Change whatever.
 - Forked from [Lumine1909's TrollingFreedom_Continue](https://github.com/Lumine1909/TrollingFreedom_Continue)
 - Original by [iAngry0](https://github.com/iangry0/TrollingFreedom)
 - Chinese translation by **Cha_Shao**
-- Gemini Flash helped fill in some gaps while I was getting back into coding
 
 ---
 
