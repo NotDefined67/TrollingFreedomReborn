@@ -1,12 +1,20 @@
 plugins {
     id("java")
-    id("com.gradleup.shadow") version "9.0.0-beta11"
-    id("io.papermc.paperweight.userdev") version "2.0.0-beta.19"
+    kotlin("jvm") version "2.4.0"
+    id("com.gradleup.shadow") version "9.4.2"
+    id("io.papermc.paperweight.userdev") version "2.0.0-beta.21"
+}
+
+paperweight {
+    reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.MOJANG_PRODUCTION
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
 }
 
 group = "com.leomadrassi"
-version = "3.2.0"
-description = "A troll plugin with GUI - modified by leo"
+version = "3.3.0"
+description = "A troll plugin with GUI - updated and maintained by leo"
 
 repositories {
     mavenCentral()
@@ -18,23 +26,36 @@ repositories {
 }
 
 dependencies {
-    paperweight.paperDevBundle("1.21.11-R0.1-SNAPSHOT")
+    kotlin("stdlib")
+    paperweight.paperDevBundle("26.1.2.build.+")
     compileOnly("net.dmulloy2:ProtocolLib:5.4.0") {
         exclude("*", "*")
     }
     implementation("commons-lang:commons-lang:2.6")
-    implementation("com.github.cryptomorin:XSeries:13.6.0")
-    compileOnly("net.citizensnpcs:citizens-main:2.0.41-SNAPSHOT") {
+    implementation("com.github.cryptomorin:XSeries:13.7.0")
+    compileOnly("net.citizensnpcs:citizens-main:2.0.42-SNAPSHOT") {
         exclude("*", "*")
     }
-    compileOnly("net.essentialsx:EssentialsX:2.22.0-SNAPSHOT") {
+    compileOnly("net.essentialsx:EssentialsX:2.22.1-SNAPSHOT") {
         exclude("*", "*")
     }
 }
 
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(25))
+}
+
+kotlin {
+    jvmToolchain(25)
+}
+
+sourceSets {
+    main {
+        kotlin {
+            srcDirs("src/main/java")
+        }
+    }
 }
 
 tasks {
@@ -65,8 +86,7 @@ tasks {
     }
     val copyJar = register<Copy>("copyJar") {
         from(shadowJar.get().archiveFile)
-        // Adjust this path if the drive letter or folder structure differs
-        into("C:/Leo/Projects/MineCraftTestServer/1.21.11/plugins/")
+        into("C:/Leo/Projects/PluginsMinecraft/TrollingFreedomReborn/jar")
     }
 
     build {
